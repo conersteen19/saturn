@@ -117,41 +117,55 @@ Note that all network interfaces need to be added.  This should be a bridge.  Mu
 ## Using Virt-Install
 One way to create new VMs is with virt-install.  This uses a disk file made by the user and the iso file can be either downloaded from the internet via a link or downloaded before using wget and specified using a file path.
 
-1.	Create image file
-qemu-img create -f qcow2 ./name.qcow2 8G
-fallocate -l 8G name.img
-i.	change ‘name’ to whatever you want to name your vm
-ii.	any size can be used. Ex uses 8GB.
-2.	Create network bridge
-a.	open /etc/network/interfaces
-b.	turn current internet source from iface ___ inet dhcp to iface ___ inet manual
-c.	add bridge:
-auto br1
-iface br1 inet static
-address xxx.xxx.xxx.xxx
-netmask xxx.xxx.xxx.xxx
-gateway xxx.xxx.xxx.xxx
-bridge_ports ____
+1.	Create image file 
+  
+    ```bash
+    qemu-img create -f qcow2 ./name.qcow2 8G
+    fallocate -l 8G name.img
+    ```
+  
+    change ‘name’ to whatever you want to name your vm
+  
+    any size can be used. Ex uses 8GB.
+
+2. create network bridge
+
+    open /etc/network/interfaces
+  
+    turn current internet source from iface ___ inet dhcp to iface ___ inet manual
+  
+    add bridge:
+ 
+    ```
+    auto br1
+    iface br1 inet static
+    address xxx.xxx.xxx.xxx
+    netmask xxx.xxx.xxx.xxx
+    gateway xxx.xxx.xxx.xxx
+    bridge_ports ____
+    ```
 3.	Run virt-install
- virt-install \
---name seshat \
---ram 4096 \
---disk path=/data/seshat.qcow2 \
---vcpus 2 \
---os-type linux \
---os-variant generic \
---network bridge=br1 \
---graphics none \
---console pty,target_type=serial \
---location 'http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/' \
---extra-args 'console=ttyS0,115200n8 serial'
-b) specifies machine name
-c) ram in mb.  Ex uses 4gb
-d) disk path and size.  This one uses first image file ex.
-e) number of cores to use
-h) define network bridge name
-k) location of iso file.  Can be URL or file path.  This is for Ubuntu 14.04
-4.	Go through standard install
-5.	After the install, vm will reboot.  You shouldn’t be able to access the login for the machine.  Reboot and console in immediately.  Enter the boot script (normally ‘e’), find line that starts with ‘linux’ and add ‘console=ttyS0’ to the end.  Then boot the machine (normally ctrl+x)
-6.	Once in the machine, type use the following to always boot w/ ttyS0
-systemctl enable getty@ttyS0
+    ```
+     virt-install \
+    --name seshat \
+    --ram 4096 \
+    --disk path=/data/seshat.qcow2 \
+    --vcpus 2 \
+    --os-type linux \
+    --os-variant generic \
+    --network bridge=br1 \
+    --graphics none \
+    --console pty,target_type=serial \
+    --location 'http://archive.ubuntu.com/ubuntu/dists/trusty/main/installer-amd64/' \
+    --extra-args 'console=ttyS0,115200n8 serial'
+    ```
+    specifies machine name
+    ram in mb.  Ex uses 4gb
+    disk path and size.  This one uses first image file ex.
+    number of cores to use
+    define network bridge name
+    location of iso file.  Can be URL or file path.  This is for Ubuntu 14.04
+4. Go through standard install
+5. After the install, vm will reboot.  You shouldn’t be able to access the login for the machine.  Reboot and console in immediately.  Enter the boot script (normally ‘e’), find line that starts with ‘linux’ and add ‘console=ttyS0’ to the end.  Then boot the machine (normally ctrl+x)
+6. Once in the machine, type use the following to always boot w/ ttyS0
+```systemctl enable getty@ttyS0```
