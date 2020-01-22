@@ -160,12 +160,20 @@ One way to create new VMs is with virt-install.  This uses a disk file made by t
     --extra-args 'console=ttyS0,115200n8 serial'
     ```
     specifies machine name
+    
     ram in mb.  Ex uses 4gb
+    
     disk path and size.  This one uses first image file ex.
+    
     number of cores to use
+    
     define network bridge name
+    
     location of iso file.  Can be URL or file path.  This is for Ubuntu 14.04
+    
 4. Go through standard install
+
 5. After the install, vm will reboot.  You shouldn’t be able to access the login for the machine.  Reboot and console in immediately.  Enter the boot script (normally ‘e’), find line that starts with ‘linux’ and add ‘console=ttyS0’ to the end.  Then boot the machine (normally ctrl+x)
+
 6. Once in the machine, type use the following to always boot w/ ttyS0
 ```systemctl enable getty@ttyS0```
