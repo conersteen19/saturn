@@ -6,8 +6,29 @@
 
 *Wildfire*: PAs ability to capture unknown files/EXEs to test what they do in a virtual environment and block them in the future.  Requires communication with the Palo Alto Cloud- tests are not done locally.
 
-## Actions
-Note no actions are applied without a __COMMIT__!!!
+## Command Line Actions
+*Note no actions are applied without a __COMMIT__!!!*
+
+*Commands should be done in ```configure``` mode*
+
+Change admin password:
+```
+set mgt-config users admin password
+```
+Restart the system
+```
+request restart system
+```
+Set management IP, Netmask, and Default-Gateway
+```
+set deviceconfig system ip-address
+set deviceconfig system subnet
+set deviceconfig system default-gateway
+```
+
+
+## Web Configuration Actions
+*Note no actions are applied without a __COMMIT__!!!*
 ### Configuration
 
 Set a static IP
