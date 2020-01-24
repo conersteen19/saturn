@@ -1,5 +1,5 @@
 # Saturn- an Engineering Guide
-This guide is a complation of knowledge used for network engineering, virtualization techniques, and other general knowledge one may find useful
+This guide is a complation of knowledge used for network engineering, virtualization techniques, and other general knowledge one may find useful.
 ## Networking Introduction and Devices
 [Networking Basics](networking_basics.md)
 
