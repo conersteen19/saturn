@@ -4,6 +4,7 @@ Why C++?
 - More efficient, more control, fast
 -	Data and program rep in memory
 -	Memory allocation
+
 Hello World:
 ```cpp
  #include <iostream>
@@ -44,7 +45,7 @@ Return_type name (input_type input_name){
 	Return return_type
 }
 ```
-C++ isn’t bright and will forget functions after they are used.  This can be fixed by having function prototypes with the first line of the function but no contents, telling the compiler the code for that function is coming
+C++ isn’t bright and will forget functions after they are used.  This can be fixed by having function prototypes with the first line of the function but no contents, telling the compiler the code for that function is coming:
 ```cpp
 Return_type name (input_type input_name);
 ```
@@ -192,3 +193,18 @@ After a reference is delcared, you can use them as a normal operator, without po
 Square & squareRef = square;
 int length = squareRef.sideLength;
 ```
+*Call by Value*: Values are copied into a new variable to be manipulated by a function.  Can be safer but is inefficient.
+
+*Call by Reference*: References are passed as parameters.  Should be used to change actual values for an object, not copies of it.
+
+*Call by Constant Reference*: Same as Call by Reference except with the ```const``` keyword before parameters.  Means the parameters won't be modified.
+
+Returning types can be done like calling (value, reference, etc.)
+
+C++ provides 4 default methods when declaring anything:
+- Default constructor
+- Copy constructor
+- Destructor
+	- Called with ```delete``` function or when code goes out of scope.
+- operator=()
+
