@@ -124,14 +124,14 @@ Ampersands (&) are used for reference types, used to get the address of somethin
 ```cpp
 X = &y
 ```
-(*) and (&) work inversely
+(\*) and (&) work inversely
 
-You can use a double asterisk (**) to have a pointer point to a pointer
+You can use a double asterisk (\*\*) to have a pointer point to a pointer
 
 Common pointer error: Not giving the pointer something to point to/not initializing the variable
 
 ## 1/24/20
-Some items work using static memory- the computer knows how much memory will be used so it can allocate and deallocate for you.  If we don’t know the amount of memory needed, we need dynamically allocated memory to have more space on the fly.  To do this, we use the “new” keyword.  Ex. Declaring an array
+Some items work using static memory- the computer knows how much memory will be used so it can allocate and deallocate for you.  If we don’t know the amount of memory needed, we need dynamically allocated memory to have more space on the fly.  To do this, we use the ```new``` keyword.  Ex. Declaring an array:
 ```cpp
 Int * ages = new int[n];
 ```
@@ -168,3 +168,27 @@ class ListNode {
  };
  ```
  Note that ```*``` is associative.  ```char* x, y``` makes x a char pointer but makes y a char.  To avoid this, move the star to the right: ```char *x, y```
+ 
+ ## 1/27/20
+ When requesting memory, double the space needed is allocated.  A key is put in front of the memory to note how large it is, making the ```delete``` function work.
+ 
+ *References*: Similar to pointers with a few differences:
+ 1. Address cannot change
+ 1. Address must be set when declaring (result of above)
+ 1. Has implicit dereferencing
+ 
+ Example of swapping reference values:
+ ```cpp
+ void swap(int & x, int & y) {
+    int temp = x;
+    x = y;
+    y = temp;
+}
+```
+Note the use of the ampersand.
+
+After a reference is delcared, you can use them as a normal operator, without pointer notation with arrows:
+```cpp
+Square & squareRef = square;
+int length = squareRef.sideLength;
+```
