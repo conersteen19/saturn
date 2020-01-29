@@ -19,5 +19,8 @@ This guide is a complation of knowledge used for network engineering, virtualiza
 ## Windows
 Nothing yet!
 
+## CCDC
+[Opening Playbook](ccdc_networking_opening.md)
+
 ## Programming
 [C++ Notes (2150 Edition)](cpp_notes.md)
