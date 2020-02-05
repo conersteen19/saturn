@@ -294,6 +294,15 @@ C defines the size of an integer or variable by implemetation definition.  It ca
 *The Endian Debate*: Computers can change which bit is the most signifigant.  **Big-Endian** works how we think with the largest bit on the far left.  Computers, however, think in **Little-Endian** which puts the largest bit the furthest to the right.  This is primarily due to addressing; the highest address should have the highest value, which is the right most digit.  Note that this effects ONLY the BYTES, NOT the BITS.  Example: in big-endian, 0xdeadbeef; in little-endian, 0xefbeadde.  The primary issue comes with network communication.  All network communication is generally done in big-endian while computers run in little-endian.
 
 *Integer Representation*: We generally reserve the left-most bit for the sign of the integer and use the rest to define numbers.  One must be careful; at first glance, two 0s exist.  100...0 is a -0 while 000...0 is a 0.  We deal with this a few ways:
-- One's Compliment: ![One's Comp](resources/onescomp.png)
-- Two's Compliment: ![Two's Comp](resources/twoscomp.png)
 
+- One's Compliment:
+	- ![One's Comp](resources/onescomp.png)
+	- No longer used
+- Two's Compliment:
+	- ![Two's Comp](resources/twoscomp.png)
+	- Most commonly used
+	- One more negative value as compared to positive values
+
+When integers overflow, it will effect the sign bit at the beginning and change the sign/magnitude of the bit.  Note that, by how Two's Compliment works, this overflows from the max to the min value (which has a magnitude one greater than max!).
+
+Note that C++ also has the ability to have unsigned ints.  Thus, we just remove the signed bit and have a lot more potential values.  This is commonly found for returning the size of an object as they cannot go negative.
