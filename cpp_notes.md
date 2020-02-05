@@ -203,8 +203,73 @@ Returning types can be done like calling (value, reference, etc.)
 
 C++ provides 4 default methods when declaring anything:
 - Default constructor
+	- Does nothing
 - Copy constructor
+	- Copies all bytes of old one into new one
+	- Doesn't care about contents
 - Destructor
 	- Called with ```delete``` function or when code goes out of scope.
 - operator=()
+	- Tells cpp how to use '=' operator between two objects
+	- Declaration will be in different statement than the equals
+	- Just copies bytes, no knowlege of contents
 
+## 1/29/20
+
+You can override how any operator works between two objects.  For example, you can change how '<<' works for cout.
+
+C++s default library is rather weak compared to Javas.  Thus, we have limited options for objects in C++.
+
+*Vectors*: Similar to array in C++.  Has a few problems: can't be copied with '=', no notion of capacity, no index validity checking.  Some methods:
+
+- int size(): how big it is
+- int capacity(): how much space there is, not how much is in the vector
+- void reserve(int newCapacity): specify size of the vector
+- void push_back(Object e), pop_back(): used for stack-like operations
+- Object& back(), front(): return end and beginning of vector
+- Object& at(int x): get object at index
+- Object& operator[](int x): overrides bracket syntax, not smart like 'at' is
+
+*Iterators*: Nested type that represents position in a vector.  Iterators use overrides for shorthand to save time:
+
+- ++: moves forward; --: moves backward
+- \*: removes pointer to object at iterator
+- ==, !=: true if same location, false otherwise
+- use begin() and end() to point to the beginning or end of vector.
+
+Use of an iterator looks as follows:
+```cpp
+for(vector<int>::iterator it = v.begin(); it != v.end(); it++){
+	cout << *it << endl;
+}
+```
+
+Vectors can do special functions with iterators: insert, erase are examples.
+
+While Java uses inheritance to write code, C++ uses templates for functions and classes.
+
+Function templates look as follows:
+```cpp
+template <typename Comparable>
+const Comparable& findMax (input){
+	//function
+}
+```
+Note that no type is specified.  This tells C++ that this is a template.  We can then use this template for multiple types instead of creating unique methods for each.  It will check for operators in the function to properly override them.
+
+You can also make these templates for classes to expand to different types of objects:
+```cpp
+template <typename Object>
+class NewObject {
+	public:
+		NewObject(const Object& initValue = Object()) : storedValue(initValue) {}
+		//Some Methods
+	Private:
+		//Some values
+}
+```
+Note that templates can have more than one parameter, nontype parameters, and have default values for those parameters.
+
+*Stacks*: Last In, First Out.  Like a stack of papers, add values on top, take next value from top.  Opposite is a queue.  Java provides default methods in their class such as push (insert at top), pop (delete from top), and top (get top value).  Example uses include postfix calculators, activiation records,  and symbol balancing.
+
+Stacks can be implemented with a linked list, array, or vector.
