@@ -246,6 +246,8 @@ for(vector<int>::iterator it = v.begin(); it != v.end(); it++){
 
 Vectors can do special functions with iterators: insert, erase are examples.
 
+## 1/31/20
+
 While Java uses inheritance to write code, C++ uses templates for functions and classes.
 
 Function templates look as follows:
@@ -273,3 +275,6 @@ Note that templates can have more than one parameter, nontype parameters, and ha
 *Stacks*: Last In, First Out.  Like a stack of papers, add values on top, take next value from top.  Opposite is a queue.  Java provides default methods in their class such as push (insert at top), pop (delete from top), and top (get top value).  Example uses include postfix calculators, activiation records,  and symbol balancing.
 
 Stacks can be implemented with a linked list, array, or vector.
+
+## 2/3/20
+
