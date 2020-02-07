@@ -306,3 +306,45 @@ C defines the size of an integer or variable by implemetation definition.  It ca
 When integers overflow, it will effect the sign bit at the beginning and change the sign/magnitude of the bit.  Note that, by how Two's Compliment works, this overflows from the max to the min value (which has a magnitude one greater than max!).
 
 Note that C++ also has the ability to have unsigned ints.  Thus, we just remove the signed bit and have a lot more potential values.  This is commonly found for returning the size of an object as they cannot go negative.
+
+## 2/7/20
+*Real Numbers*: Used to use fixed point real numbers: they only used the decimal point in a single spot and stuck a decimal at the end, doesn't work for infinite fractions.  Now we use floating point fractions in scientific notation: sign bit, mantissa bits, and exponent bits.  They use the breakdowns as follows:
+
+- bit 1: sign bit, 1 means negative (1 bit)
+- bits 2-9: exponent (8 bits)
+- bits 10-32: mantissa (23 bits)
+	- mantissa= 1.0 + (sum){i=1},{23} b_i/2^i
+
+And exponent values work as follows:
+
+- 0: zeros
+- 254: exponent-127
+	- The value of 127 is called the exponent offset or the bias
+- 255: infinities, overflow, underflow, NaN
+
+*Converting float from binary to decimal*:
+
+Given: 0100 0001 1100 1000 0000 0000 0000 0000
+
+First bit -> sign = (+)
+
+Next 8: 100 0001 1 -> exp = 131 - 127 = 4
+
+Mantissa: 100 1000 0000 0000 0000 0000 -> mantissa = 1.5625
+
+- The '1' bits in positions 1 and 4 represent (1/2)^1 and (1/2)^4; That's 0.5 + 0.0625 = 0.5625, add one to get the final value.
+
+-> 1.5625 * 2^4 = 1.5625 * 16 = 25.0
+
+*Converting float from decimal to binary*:
+
+Take out sign bit.
+
+Find what power of 2 is required to bring the number to 1.0 <= x < 2.0.  Multiply -> negative, divide -> positive.
+
+Mantissa = f/2^exponent.  Make sure to subtract 1 to get your decimal range.
+
+Max value of this form: 2 * 2^127 = 3.402823 * 10^38; Min (i.e. closest to 0) value for this form: 1 * 2^-126 = 1.175494 x 10^-38
+
+Note that this form is not spatially uniform... changing one bit doesn't produce a 'constant' change.  Higher exponents will 'gain' more when the mantissa increases.
+
