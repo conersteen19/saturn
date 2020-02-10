@@ -276,8 +276,6 @@ Note that templates can have more than one parameter, nontype parameters, and ha
 
 Stacks can be implemented with a linked list, array, or vector.
 
-## 2/3/20
-
 ## 2/5/20
 *Radix to decimal*: Conversion of bases from another type to decimal.
 
@@ -348,3 +346,29 @@ Max value of this form: 2 * 2^127 = 3.402823 * 10^38; Min (i.e. closest to 0) va
 
 Note that this form is not spatially uniform... changing one bit doesn't produce a 'constant' change.  Higher exponents will 'gain' more when the mantissa increases.
 
+## 2/10/20
+
+When you have a repeating decimal appear during its binary conversion, you can't accurately store it.  Thus you end with not exactly the same number, just long trains of decimals that aren't quite whole numbers.  This means comparisons with floating point numbers can lead to stealthy logical errors.  If you want to get around this, set a decimal criteria for how close things are and compare that (```bool test = fabs(x-y) < error;```).
+
+You can test for these repeated decimals by looking in the decimal form.  If its denominator has factors that are not factors of the radix, it will repeat (and in our case, radix = 2).  To get around this you can use a rational class or more digits (BigFloat).
+
+In 64 bits, the layout is as follows:
+- 1: sign bit
+- 2-12: exponent (11 total)
+- 13-64: mantissa (52 total)
+- Exponent offset: e^(e-1)-1 = 1023
+
+*Arrays*: Primative type that holds objects in a list like format.  Can be specified either of these ways:
+```cpp
+int someInts[3];
+int someInts[] = {1,2,3};
+int* someInts = new int[3]; //requires deletion with the delete keyword
+```
+Note when making an array, it allocated one more space for a pointer to the array.  I.e. array\[3\] reserved 4 spots in memory.
+
+Note that C++ doesn't allow you to delete the value of an array name.  This is due to the complier doing deallocation itself and it doesn't want to lose where that array is.  Imagine this as a constant pointer.
+
+Notes to remember about arrays:
+- No index checking/bounds checking (doesn't know if you're asking about an index out of range)
+- When passed as an argument, it has no clue of the size.  Will have to pass as a parameter.
+- Cannot be copied or compared with = or ==, respectively.  Must be done manually.
