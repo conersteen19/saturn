@@ -1,4 +1,12 @@
 # C++ Notes (from CS 2150)
+## Aliases
+```
+alias cs='cd "/mnt/c/Users/coner/Google Drive/College Work/Semester 4/CS 2150/pdr"; git pull; cd ..'
+alias cl='clang++ -Wall -g -o a.out'
+alias run='./a.out'
+alias memcl='valgrind --leak-check=full ./a.out'
+```
+
 ## 1/15/20
 Why C++?
 - More efficient, more control, fast
