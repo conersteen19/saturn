@@ -397,7 +397,17 @@ Note when you specify no command line parameters, argc = 1 b/c argv\[0\] is the 
 C-strings can be converted to a string with the ```string s()``` method.  Then they work as we intend.
 
 *Order of Growth*:
-- Big O: runs (<=) a certain bound
-- Big Omega: runs (>=) a certain bound
+- Big O: runs less than (<=) a certain bound
+- Big Omega: runs greater than (>=) a certain bound
 - Big Theta: runs following a certain bound
 - ![Big Notation](resources/bignotation.png)
+- Note that these only apply to large amount of values and is negligible at smaller numbers
+
+To analyze a function f(n) as compared to a function g(n), we assusme f(n) is above Big Theta and Below Big O.  We also assume we are finding the worst case element.  This leads us to define:
+- O(g) is the set of functions f, st. f(n) <= c\*g(n) for all n > n_0
+- Omega(g) is the set of functions f, st. f(n) >= c\*g(n) for all n > n_0
+- Theta(g) = O(g) and Omega(g)
+	- Theta(g) is the asymptotic order (or just the order) of g
+	- f is element of Theta(g) is read as "f is (asymptotic) order g"
+
+Note that the c is used to cancel any constants seperating f(n) from g(n).  This removes the time unit from the equation to allow a direct comparison.
