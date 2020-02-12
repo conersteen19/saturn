@@ -370,7 +370,7 @@ In 64 bits, the layout is as follows:
 ```cpp
 int someInts[3];
 int someInts[] = {1,2,3};
-int* someInts = new int[3]; //requires deletion with the delete keyword
+int* someInts = new int[3]; //requires deletion with the delete[] keyword
 ```
 Note when making an array, it allocated one more space for a pointer to the array.  I.e. array\[3\] reserved 4 spots in memory.
 
@@ -379,4 +379,25 @@ Note that C++ doesn't allow you to delete the value of an array name.  This is d
 Notes to remember about arrays:
 - No index checking/bounds checking (doesn't know if you're asking about an index out of range)
 - When passed as an argument, it has no clue of the size.  Will have to pass as a parameter.
-- Cannot be copied or compared with = or ==, respectively.  Must be done manually.
+- Cannot be copied or compared with = or == (checks if same memory location), respectively.  Must be done manually.
+
+## 2/12/20
+The array "pointer" created points to the first value of the array.  The array then increments its address by the size of the object so the computer always knows where to look.  Multidimensional arrays are organized by the furthest right index incremented in memory first then moving all the way to the right.  This is known as *Row Major Order*.  I.e. a\[0\]\[0\] -> a\[0\]\[1\] -> ... -> a\[1\]\[0\].
+
+Due to the way C++ works, you can have bounds overflow and be accessing a different cell than you may think.  As an example, in a 1x2 array, a\[1\]\[2\] == 1\[0\]\[5\].
+
+*Passing parameters into main*:
+```cpp
+int main(int argc, char* argv[]){    //char* is known as a C-string
+	return 0;
+}
+```
+Note when you specify no command line parameters, argc = 1 b/c argv\[0\] is the name of the program.  
+
+C-strings can be converted to a string with the ```string s()``` method.  Then they work as we intend.
+
+*Order of Growth*:
+- Big O: runs (<=) a certain bound
+- Big Omega: runs (>=) a certain bound
+- Big Theta: runs following a certain bound
+- ![Big Notation](resources/bignotation.png)
