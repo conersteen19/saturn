@@ -397,17 +397,61 @@ Note when you specify no command line parameters, argc = 1 b/c argv\[0\] is the 
 C-strings can be converted to a string with the ```string s()``` method.  Then they work as we intend.
 
 *Order of Growth*:
-- Big O: runs less than (<=) a certain bound
-- Big Omega: runs greater than (>=) a certain bound
-- Big Theta: runs following a certain bound
+- Big O: runs less than (<=) a certain bound; upper bound
+- Big Ω: runs greater than (>=) a certain bound; lower bound
+- Big Θ: runs following a certain function; tight bound
 - ![Big Notation](resources/bignotation.png)
 - Note that these only apply to large amount of values and is negligible at smaller numbers
 
-To analyze a function f(n) as compared to a function g(n), we assusme f(n) is above Big Theta and Below Big O.  We also assume we are finding the worst case element.  This leads us to define:
+To analyze a function f(n) as compared to a function g(n), we assusme f(n) is above Big Θ and Below Big O.  We also assume we are finding the worst case element.  This leads us to define:
 - O(g) is the set of functions f, st. f(n) <= c\*g(n) for all n > n_0
-- Omega(g) is the set of functions f, st. f(n) >= c\*g(n) for all n > n_0
-- Theta(g) = O(g) and Omega(g)
-	- Theta(g) is the asymptotic order (or just the order) of g
-	- f is element of Theta(g) is read as "f is (asymptotic) order g"
+- Ω(g) is the set of functions f, st. f(n) >= c\*g(n) for all n > n_0
+- Θ(g) = O(g) and Ω(g)
+	- Θ(g) is the asymptotic order (or just the order) of g
+	- f is element of Θ(g) is read as "f is (asymptotic) order g"
 
-Note that the c is used to cancel any constants seperating f(n) from g(n).  This removes the time unit from the equation to allow a direct comparison.
+Note that the c is used to cancel any constants seperating f(n) from g(n).  This removes the time unit from the equation (things like the computer/OS used) to allow a direct comparison.
+
+## 2/14/20
+Proof for Big-O examples:
+```
+Prove: 10n is an element of O(n)
+10n is an element of O(n)
+10n <= c and for all n > n_0
+	let c = 10
+10 <= 10n for all n >= n_0
+1 <= 1 for all n >= n_0
+QED
+```
+Note any n_0 or c can be chosen, but they should be picked strategically to prove understanding.
+
+Note we use "is an element of" NOT =.  This is on purpose; Big-\* are sets.
+
+Note Big-Ω uses the same proof, just with a comparator change from less than to greater than
+
+To prove Big-Θ, we must prove the function is Big-O AND Big-Ω of the same function.
+
+Little-O also exists.  This uses less than instead of less than or equal to.  This strictly defines something as a lower bound which implies it **cannot** be Big-Θ.  Little-Ω also exists.
+
+Some functional properties:
+- Reversing big-O: f ∈ O(g) ⇔ g ∈ Ω(f)
+- Adding big-O: O(f + g) = O(max(f, g))
+    - Similar equations hold for Ω and Θ
+- Transitive: If f ∈ O(g) and g ∈ O(h), then f ∈ O(h)
+	- Big-O is transitive, as are all the others (big-theta, big-omega, little-oh, and little-omega)
+- Reflexive: f ∈ Θ(f)
+	- As are big-O and big-omega
+- Symmetric: If f ∈ Θ(g), then g ∈ Θ(f)
+	- Big-Oh is not symmetric! (neither are Ω, o, or ω)
+- Θ defines an equivalence relation on the functions
+
+Reminder that c^n grows faster than n^k for all c, k > 1.
+
+Loops generally run in n time.  As you nest them, it raises per each loop (3 nested loops -> n^3).  Remember to take the worse case route.
+
+Examples of algorithm running times:
+- Constant: Size of vector, linked list insert or delete, finding nth element in array/vector
+- Log (space cut in half each iteration): Binary/balanced tree search
+- Linear (process for each element): printing, find in unsorted array, find in link list, doubling a vector's array
+- LogLinear (doing a log operation on each element): mergesort, heapsort, quicksort (on good day), inserting at log time
+- Quadratic: insertion sort, bubble sort, selection sort, quicksort (on bad day), graph algos, double nested loops
