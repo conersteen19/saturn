@@ -106,7 +106,7 @@ Const can also be used to set a value at compiletime that cannot be changed, dec
 
 Objects can be destroyed just as they are created.  In your header, define a destructor with a “~” before a copy of the constructor.
 
-1/22/20
+## 1/22/20
 Preprocessing- going through a file and dealing with the “#” things
 Examples
 - #include <name> or “name”: direct copy of file specified to location specified
