@@ -471,7 +471,7 @@ Lingo:
 - Length: number of edges (connections between nodes) in a path
 - Internal Path Length: Sum of the depths of all nodes in a path
 - Ordering:
-- ![-Fix Notation](resources/treeorder.png)
+- ![-Fix Notation](resources/treeorder.png =100x20)
 
 Types of trees:
 - Parse tree: builds a tree out of an equation in order to properly interpret it.
