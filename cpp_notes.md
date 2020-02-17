@@ -471,9 +471,28 @@ Lingo:
 - Length: number of edges (connections between nodes) in a path
 - Internal Path Length: Sum of the depths of all nodes in a path
 - Ordering:
-- ![-Fix Notation](resources/treeorder.png =100x20)
+- ![-Fix Notation](resources/treeorder.png)
+	- Note that infix notation can get confusing while working with expression analysis.  Parenthesis matter in order to properly enforce order of operations.
 
-Types of trees:
+General types of trees:
 - Parse tree: builds a tree out of an equation in order to properly interpret it.
 - Geneology tree: has complex relationships between nodes (i.e. steps, greats, etc.)
 - First Child/Next Sibling notation: Each TreeNode has a firstChild and a nextSibling field to create trees with n number of children per layer
+
+*Binary Search Trees*: Max of 2 children per node.  Nodes to the 'left' of the current node are less than the current node; nodes to the 'right' of the current node must be greater than it.  No duplicates are allowed.  BST Methods:
+- Find: look at current node (starting at root).  If less than value, recurse left.  If greater than value, recurse right.  If you reach a null,  it is not in tree.
+	- Note that this is still a LINEAR algorithm assuming the tree doesn't have to be balanced.
+- Insert: Do find, insert when you find a null.
+	- Example Code:
+	```cpp
+	void BST::insert(int x, BinaryNode * & curNode) {
+    		if (curNode==NULL)
+      			curNode = new BinaryNode(x,NULL,NULL);
+   		else if (x < curNode->element)
+        		insert(x, curNode->left);
+    		else if (x > curNode->element)
+        		insert(x, curNode->right);
+    		else
+        		;    
+		}
+		```
