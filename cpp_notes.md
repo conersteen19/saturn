@@ -455,3 +455,25 @@ Examples of algorithm running times:
 - Linear (process for each element): printing, find in unsorted array, find in link list, doubling a vector's array
 - LogLinear (doing a log operation on each element): mergesort, heapsort, quicksort (on good day), inserting at log time
 - Quadratic: insertion sort, bubble sort, selection sort, quicksort (on bad day), graph algos, double nested loops
+
+## 2/17/20
+*Trees*: Each element in a set that has up to n connected children.  Unlike lists, not every element has an individual direct relationship with its following element.  Trees can have multiple children, creating more complex web connections.
+
+Lingo:
+- Parent: Node above the current node
+- Child (left and right): Nodes below the current node
+- Root: Node with no parent
+- Leaf: Node with no children
+- Siblings: Two nodes with the same parent
+- Height of a node: *Longest* path from current node to a leaf
+- Depth of a node: Longest path from current node to a root
+- Path: sequence of nodes
+- Length: number of edges (connections between nodes) in a path
+- Internal Path Length: Sum of the depths of all nodes in a path
+- Ordering:
+- ![-Fix Notation](resources/treeorder.png)
+
+Types of trees:
+- Parse tree: builds a tree out of an equation in order to properly interpret it.
+- Geneology tree: has complex relationships between nodes (i.e. steps, greats, etc.)
+- First Child/Next Sibling notation: Each TreeNode has a firstChild and a nextSibling field to create trees with n number of children per layer
