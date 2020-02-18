@@ -419,7 +419,7 @@ Prove: 10n is an element of O(n)
 10n is an element of O(n)
 10n <= c and for all n > n_0
 	let c = 10
-10 <= 10n for all n >= n_0
+10n <= 10n for all n >= n_0
 1 <= 1 for all n >= n_0
 QED
 ```
