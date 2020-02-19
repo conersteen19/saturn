@@ -494,5 +494,25 @@ General types of trees:
         		insert(x, curNode->right);
     		else
         		;    
-		}
-		```
+	}
+	```
+- Find Max: Keep going right until NULL
+- Find Min: Keep going left until NULL
+- Removing (no children): remove the node outright
+- Removing (one child): replace node with child
+- Removing (two children): replace with next least child in the RIGHT subtree of the node to be removed (i.e. next highest number in the tree)
+	- Note this also works with the next smallest value; however, in this course, we will use the next highest value
+
+Note that the max height of a tree is 2^(h+1)-1.  (Proved by induction)
+
+## 2/19/20
+Perfect binary tree: full elements on every level => that it can only hold 2^n-1 elements (n > 0).
+
+*Expression Tree*: A way to keep internal representation of a math equation.  Can be written in pre/in/post-fix.  You can build a tree (from postfix) as follows:
+- Use a stack of node **pointers**.  This is so we can properly change the objects and their values.
+- Push values to the stack
+- When you reach an operator, pop the top two values of the stack as the operator's children and push the operator to the stack
+
+*AVL Trees*: A type of balanced binary tree that keeps the tree balanced to allow Θ(logn).  We do this by manually balancing the tree when certain nodes are added to it that unbalance it.  We define balanced as *the height of the left and right subtrees differ by at most 1*.
+
+To maintain this balance, we give AVL nodes an additional variable: a balance factor.  The balance factor is the height of the right subtree minus the height of the left subtree.  This value should be between -1>=bf>=1 and the tree should adjusted if it reaches either -2 or 2.
