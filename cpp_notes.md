@@ -516,3 +516,23 @@ Perfect binary tree: full elements on every level => that it can only hold 2^n-1
 *AVL Trees*: A type of balanced binary tree that keeps the tree balanced to allow Θ(logn).  We do this by manually balancing the tree when certain nodes are added to it that unbalance it.  We define balanced as *the height of the left and right subtrees differ by at most 1*.
 
 To maintain this balance, we give AVL nodes an additional variable: a balance factor.  The balance factor is the height of the right subtree minus the height of the left subtree.  This value should be between -1>=bf>=1 and the tree should adjusted if it reaches either -2 or 2.
+
+## 2/21/20
+AVL Trees run find the same as a BST.  However, insert is slightly different.  If the inserted node causes an unbalace in the tree, the tree will have to be 'rotated'.  The balance factors that can be modified are those only in the path of the insert of the node.  Insert still runs in log(n) time.  These rotations work as follows:
+- Start from inserted node.  Work way up until you hit a node that is unbalanced (-2 or 2).  This implies that the lowest nodes will fix the higher up nodes, meaning only one rotation will be necessary.
+- One of the following cases will cause the rotation:
+	- Left subtree of left child of x
+	- Right subtree of left child of x
+	- Left subtree of right child of x
+	- Right subtree of right child of x
+- The first and last case require a single rotation.  The middle two require a double rotation.
+
+*Single Rotation*: Used for a left-left or a right-right imbalance.  The node below the unbalanced node becomes the new parent for the unbalanced node.  The unbalanced node the becomes a child of the lesser side of the tree and takes on that subtree as a child.  Works either right or left.
+- Note that the subtrees will change with the node: if a right rotation, the node moving up's right tree *moves up* with the node and enters its new right subtree with the previous values.  Same as reversed with the left.
+- Node that at least one node will move up and one will move down, simultaneously increasing and decreasing the depth.
+
+*Double Rotation*: Used for a left-right or right-left imbalance.  Double rotations are used as two independent single rotations: one on a child and one in the other direction on a parent.  I.e. in a node inserted in a left child's right subtree, rotate around the left child to the left.  The rotate the node to the right.  The same works in reverse.
+
+Note you can determine what type of rotation you need based on the signs of the balance factor of the unbalanced node and the child of its direction.
+
+Other runtimes: remove is log(n), print is n.
