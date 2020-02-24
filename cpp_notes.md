@@ -536,3 +536,38 @@ AVL Trees run find the same as a BST.  However, insert is slightly different.  I
 Note you can determine what type of rotation you need based on the signs of the balance factor of the unbalanced node and the child of its direction.
 
 Other runtimes: remove is log(n), print is n.
+
+## 2/24/20
+*Tail Recursion*: Returning exact values instead of performing an operation on each call of the function.  Tail conversion is recognizeable by a compiler and can be optimized into a for loop automatically.  
+
+*Red-Black Trees*: A type of tree where each node is either RED or BLACK.  They also rotate and move nodes around just like an AVL tree.  The properties of a R-B tree are as follows:
+- All nodes are red or black
+- Root is always black
+- Leaf Nodes (null children) are always black
+- Both children of every red node are black (no red nodes on top of each other)
+- Every simple path from the node to any descendent leaf takes the same number of black nodes
+	- This implies the max path length will be 8 nodes long (half black, half red)
+	- This makes *layers* in the tree of black nodes specifying depth... ok to have red between them
+Inserting in R-B trees has a few cases:
+- Insert as normal for BST and color it red
+- One of 5 cases occurs:
+	- The new node is the root node
+	- The new node's parent is black
+	- Both the parent and uncle (aunt?) are red
+	- Parent is red, uncle is black, new node is the right child of parent
+	- Parent is red, uncle is black, new node is the left child of parent
+
+Removing works similarly to an BST as well but has **6** removal cases as well.  These are:
+- N is the new root
+- S is red
+- P, S, and S's children are black
+- S and S's children are black, but P is red
+- S is black, S's left child is red, S's right child is black, and N is the left child of its parent
+- S is black, S's right child is red, and N is the left child of parent P
+
+Both of these always run at log(n) time.  This means they are consistenly faster than AVL trees and this is their primary use.  These are some benefits with history and less rotations but those are sort of ignored.
+
+*Hashing*: Used for CONSTANT TIME find().  Stores in key-value pairs, meaning it can be near constant if we 'encode' and 'decode' information into hashes.  This works by putting your key into an HASH function which converts your key into an unsigned integer.  You then store the value into that key's hash (its 'number') so we can always know where to find it based on your hashing algorithm.
+
+These hash functions must meet certain conditions: must be deterministic (always returns the same thing), must be fast, and must be evenly distributed.
+
