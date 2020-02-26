@@ -594,3 +594,4 @@ We can deal with collisions multiple ways:
 	- We can make separate chaining insert constant time by inserting at the front of the list
 - Open addressing: changing the address of a value if something is already there.  Multiple types exist:
 	- Linear: if the spot a value is hashed to is full, add one to that value until a free space is found.
+		- Still linear!  May have to probe through full list
