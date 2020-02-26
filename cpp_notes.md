@@ -567,7 +567,30 @@ Removing works similarly to an BST as well but has **6** removal cases as well. 
 
 Both of these always run at log(n) time.  This means they are consistenly faster than AVL trees and this is their primary use.  These are some benefits with history and less rotations but those are sort of ignored.
 
-*Hashing*: Used for CONSTANT TIME find().  Stores in key-value pairs, meaning it can be near constant if we 'encode' and 'decode' information into hashes.  This works by putting your key into an HASH function which converts your key into an unsigned integer.  You then store the value into that key's hash (its 'number') so we can always know where to find it based on your hashing algorithm.
+*Hashing*: Used for CONSTANT TIME find().  Stores in key-value pairs, meaning it can be near constant if we 'encode' and 'decode' information into hashes.  This works by putting your key into an HASH function which converts your key into an *unsigned* integer.  You then store the value into that key's hash (its 'number') so we can always know where to find it based on your hashing algorithm.
 
-These hash functions must meet certain conditions: must be deterministic (always returns the same thing), must be fast, and must be evenly distributed.
+These hash functions must meet certain conditions: must produce an *unsigned* int, must be deterministic (always returns the same thing), must be fast, and must be evenly distributed.
 
+## 2/26/20
+When createing hash functions, one must be careful when working with size (compared to number of nodes), amount of memory used, speed of the hash (a log(n) hash doesn't help us at all), and other considerations.  A *collision* is when two keys hash to the same value and can be complicated to deal with.  This means we define a *perfect hash function* has no blanks and no collisions on top of all the previous requirements.
+
+An example string hash function could work as follows:
+- hash(s) = s0 mod table_size
+- hash(s) = (sum of all the letters) mod table_size
+	- This still won't be evenly distributed
+- hash(s) = (sum of all letters; multiply each letter by 37^i) mod table_size
+	- This will be more evenly distributed; works better with a prime number
+	- Can help to precompute these values and avoid the .pow function
+	- This will still overflow.  That is perfectly ok assuming it overflows *deterministically*
+
+We can deal with collisions multiple ways:
+- Separate chaining: we keep values in a linked list in each of the array elements.  The array is full of pointers to the start of a list and each node in the chain points to the next hashed value at that index
+	- The worse-case for this hash table becomes *linear* because each hash value could go to the same spot, making it linear.  It will typically run in constant time but theta(hash) would still be linear.
+	- You could try to game this system by making a red-black tree run in each index but this makes it even more inefficient: too much overhead.  These mostly operate with small values which don't make sense for a r-b tree
+	- *Load Factor (lambda)*: ratio of number of elements divided by the table size.  This is the average number of elements in a bucket for separate chaining.  On an unsuccessful find, we hit lambda average time.  On a successful find, we hit 1+(lambda)/2 time.
+	- We can use this load factor to define the size of the hash table.  These change based on the allowed lambda and call a rehash function when that value is reached.
+		- lambda = 1: average bucket size is 1, make it be the number of elements expected
+		- lambda = 0.75: table > # elements, good trade off of time and memory, used by Java, lower change of collision
+	- We can make separate chaining insert constant time by inserting at the front of the list
+- Open addressing: changing the address of a value if something is already there.  Multiple types exist:
+	- Linear: if the spot a value is hashed to is full, add one to that value until a free space is found.
