@@ -571,7 +571,7 @@ Both of these always run at log(n) time.  This means they are consistenly faster
 
 These hash functions must meet certain conditions: must produce an *unsigned* int, must be deterministic (always returns the same thing), must be fast, and must be evenly distributed.
 
-## 2/26/20
+## 2/26/20, 2/28/20
 When createing hash functions, one must be careful when working with size (compared to number of nodes), amount of memory used, speed of the hash (a log(n) hash doesn't help us at all), and other considerations.  A *collision* is when two keys hash to the same value and can be complicated to deal with.  This means we define a *perfect hash function* has no blanks and no collisions on top of all the previous requirements.
 
 An example string hash function could work as follows:
@@ -594,4 +594,27 @@ We can deal with collisions multiple ways:
 	- We can make separate chaining insert constant time by inserting at the front of the list
 - Open addressing: changing the address of a value if something is already there.  Multiple types exist:
 	- Linear: if the spot a value is hashed to is full, add one to that value until a free space is found.
-		- Still linear!  May have to probe through full list
+		- Still linear time!  May have to probe through full list
+		- Look for value in hashed cell then keep adding 1 to the one you check until you find it.
+		- This tends to form clusters of inserted values
+		- This also can form holes when removing values.  Fix for this further down.
+	- Quadratic: instead of incrementing by one, check i^2 cell (i.e. 1, 4, 9, ...)
+		- Same format as linear but jumps out of clusers much faster
+	- Double Hashing: creating a second hashing function to help find a spot
+		- Increment hash_1(k) + i\*hash_2(k), let i=0 -> inf
+		- Ensure secondary hash isn't 0, set it 1 manually
+		- Faster than the other options but more complicated
+		- This can cause thrashing: when the hash loops around the array while all values are filled.  To fix this, *our tables much have a prime number length!*
+		- Note this function is given to us in the lab
+		
+Rehashing: when a load factor gets too close to a certain value, we may need to increase the size of the table
+- Easist to base when to do this on your load factor hits somewhere around 0.5 or 0.75, it can also be done when an insert fails or some other reason.
+- Must rehash every value, they will likely go into different spots
+- This is horribly inefficient.  Worst case is O(n^2).
+
+Removing an element
+- No good way to do this
+- Rehash upon delete is very expensive
+- You could put a placeholder/sentinel value, but it is difficult to deal with them; works well for insert but not find (ends up becoming linear)
+	- could rehash when percent of table becomes a placeholder (5-10%)
+- By this factor this isn't a good data structure for a lot of removals
