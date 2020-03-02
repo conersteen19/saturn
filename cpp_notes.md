@@ -618,3 +618,5 @@ Removing an element
 - You could put a placeholder/sentinel value, but it is difficult to deal with them; works well for insert but not find (ends up becoming linear)
 	- could rehash when percent of table becomes a placeholder (5-10%)
 - By this factor this isn't a good data structure for a lot of removals
+
+## 3/2/20
