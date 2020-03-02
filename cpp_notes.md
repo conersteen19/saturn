@@ -620,3 +620,33 @@ Removing an element
 - By this factor this isn't a good data structure for a lot of removals
 
 ## 3/2/20
+*IBCM*: custom made assembly code used to get concepts for how assembly works.  Translates DIRECTLY to bits.  Important for machine designers, compiler writers, OS programming, etc.
+
+Processor design notes: Registeres run in *1* CPU cycle.  Memory runs in ~100 CPU cycles: very slow compared to on-processor memory.  Cache is the middle ground between the two and takes around 3-5 CPU cycles.  This optimized your CPU by copying values to cache and operating on them in there.  
+
+Fetch Execute Cycle:
+```assembly
+while(power is on) {
+    IR := memory[PC]
+    Increment PC by length of instruction
+    execute instruction in IR
+}
+```
+Our computers generally used x86 which specify explicit registers.  Our language uses only one register so we imply usage.
+
+IBCM Notes:
+- Single accumulator: 16 bits
+- Memory is in 16 bit chunks with 4096 total spots in memory.  Initially 0 and addresses in hex (0x000 - 0xfff)
+- Instructions are written in opcode (4 bit) and address (12 bits)
+	 - \[(15)(14)(13)(12)\]opcode      \[(11)(10)(9)...(0)\]address/additional instructions
+
+Opcodes and what they do:
+
+0) Halt.  It halts the machine.  Doesn't care what the remaining digits are
+1) IO.  Next two bits specify type of input.  Bit 11 specifies input (1) or output (0); bit 10 specifies hex word (0) or ascii (1)
+2) Shifts. Bit 11 specifies shift (0) or rotate (1) and bit 10 specifies direction: left (0) and right (1)
+
+	a) A shift scoots the expression 3 binary digits to the specified direction.  The leading 3 bits are lost and 3 0s are picked up.
+	
+The rest of the commands:
+![IBCM Commands](resources/ibcm.png)
