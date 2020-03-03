@@ -649,4 +649,7 @@ Opcodes and what they do:
 	a) A shift scoots the expression 3 binary digits to the specified direction.  The leading 3 bits are lost and 3 0s are picked up.
 	
 The rest of the commands:
-![IBCM Commands](resources/ibcm.png)
+![IBCM Commands](resources/ibcm.PNG)
+
+Note no way to 'declare' a variable.  We just assign a var to a memory address, but, in writing, we use ```dw``` so people know what you are talking about.
+
