@@ -653,3 +653,16 @@ The rest of the commands:
 
 Note no way to 'declare' a variable.  We just assign a var to a memory address, but, in writing, we use ```dw``` so people know what you are talking about.
 
+Note that 'and', 'or', etc. are BITwise operators.  They manually compare each bit in the hex string.
+
+## 3/4/20
+By working in Assembly, we ofuscate the the difference between memory and instructions.  Values can be put in the accumulator and operated upon and also be an instruction that the code will execute (ex. load)
+
+How to write assembly:
+1. Write in pseudocode
+1. Translate into optcodes
+1. Trace the opcodes (step through it manually)
+1. Encode into a machine
+1. Test in simulator!  Great success!
+
+Convert loops into subtraction/additions to check exit conditions.  You can also use multiple jumps to work as if/elif/else statements
