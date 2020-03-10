@@ -666,3 +666,10 @@ How to write assembly:
 1. Test in simulator!  Great success!
 
 Convert loops into subtraction/additions to check exit conditions.  You can also use multiple jumps to work as if/elif/else statements
+
+## 3/6/20
+Working with arrays can be done by storing the starting index of the array and a counter variable.  Add the counter to the starting index for as many times as you're looking for and load (by adding 5000- setting opcode to load) the value of that addition to get the value in the array.  These are called *self modifying programs* but are not commonly used in the real world due to security concerns.
+
+*Splay Trees*: Self balancing binary trees.  They are used to splay, or move a node to become the new root of the tree.  You do this by rotating the tree to move the node up.  This leads to lots of unbalanced trees.  Note that even when doing find (successful OR unsuccessful), you still rotate the tree.  The point is always keeping the most recently accessed node at the root of the tree.  This code works wonderful for accessing a small subset of a large number of data repeatedly.
+
+*Amortized time*: Time that follows a certain big theta value but has unique, finite circumstances where it runs at much different value than the average.  This is sort of pseudo time- it normally goes this speed but there are exceptions.  Splay tree functions run at amortized log(n).  Vector insert is also amortized constant- it may have to increase its size, which is linear.
