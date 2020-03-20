@@ -673,3 +673,32 @@ Working with arrays can be done by storing the starting index of the array and a
 *Splay Trees*: Self balancing binary trees.  They are used to splay, or move a node to become the new root of the tree.  You do this by rotating the tree to move the node up.  This leads to lots of unbalanced trees.  Note that even when doing find (successful OR unsuccessful), you still rotate the tree.  The point is always keeping the most recently accessed node at the root of the tree.  This code works wonderful for accessing a small subset of a large number of data repeatedly.
 
 *Amortized time*: Time that follows a certain big theta value but has unique, finite circumstances where it runs at much different value than the average.  This is sort of pseudo time- it normally goes this speed but there are exceptions.  Splay tree functions run at amortized log(n).  Vector insert is also amortized constant- it may have to increase its size, which is linear.
+
+
+
+## 3/20/20
+*x86*: Architecture made by Intel back in the 70s.  Has 16 registers, not named linearly (a, b, c, d, ax, bx, ... , eax, ... , rax, ...).  Two special registers: base pointer and stack pointer.  Registers split as follows:
+- First 8 bits: al
+- Second 8 bits: ah
+- first 16 bits: ax
+- first 32 bits: eax
+- first 64 bits: rax
+This is done to allow for backwards compatability.
+
+x86 allows you to create a seperate data section.  Specify variable names and value (specifying type by how you type it).
+- DB = 1 byte
+- DW = 2 bytes
+- DD = 4 bytes
+- DQ = 8 bytes
+
+You can leave a variable undeclared with a question mark.  You can declare an array with comma seperated values or declare the data type as ```times <number of elements> <size of data>```.  Strings are stored as char arrays from quotes.
+
+Some common instructions:
+- ```mov <dest>, <src>```: more like a copy command.  Can specify a register, constant, var name, pointer.  ```movl``` moves a double word, ```movq``` moves quad word, etc.  We can just write mov and the assembler will change that for us.  You can do basic arithmatic (multiplication, addition, subtraction) before a mov to save a step.  Note you cannot subtract registers from another, can't add more than 2 registers, or do multiple multiplications.  Also note that destinations cannot be constant and you cannot access memory twice in one instruction (memory not fast enough).
+- ```[___]```: works like a pointer.  Follows the trail to the regsiter and takes that value, this is how you dereference.
+- ```lea <dest>, <src>```: load effective address.  Gets address of a thing, such as a variable.  Opposite of the brackets.
+- ```push <src>```: pushes an item to the stack.  ```pushq``` and other similar commands exist depending on size of data.  The stack exists starting at the bottom of memory and working its way up.
+- ```pop <dest>```: pops item off of stack and puts it in destination given.
+- ```add <first>, <second>``` and ```sub <first>, <second>```: add and subtract values.  Stores in first value given.
+- ```inc <src>``` and ```dec <src>```: Adds/subtracts one from given src.
+- ```imul <src>, <>, <> (optional)```: multiplies values and stores.  If only two given, multiplies and stores in first.  If 3 given, multiplies second and third term, storing in the first.  Works the same for ```idiv <>, <>, <>```
