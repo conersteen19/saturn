@@ -23,4 +23,4 @@ Nothing yet!
 [Opening Playbook](ccdc_networking_opening.md)
 
 ## Programming
-[C++ Notes (2150 Edition)](cpp_notes.md)
+[CS 2150 Notes](2150_notes.md)
