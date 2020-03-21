@@ -1,4 +1,4 @@
-# C++ Notes (from CS 2150)
+# CS 2150 Notes
 ## Aliases
 ```
 alias cs='cd "/mnt/c/Users/coner/Google Drive/College Work/Semester 4/CS 2150/pdr"; git pull; cd ..'
