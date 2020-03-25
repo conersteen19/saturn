@@ -745,3 +745,6 @@ Register use:
 Variable number of arguments can be done multiple ways: method overloading, default parameters, or variable arguments.  You can make a function that takes in an elipses number of values.  Ex. ```doubel average (int num, ...) {___}``` where ```...``` is filled with a variable number of parameters and num is the number of parameters given.  This num var is required.  An example is the ```printf``` function in C (write string with %\_s and fills in the specifiers).
 
 ## 3/25/20
+*Caller Convention* has two key parts: a prologue and an epilogue.  In the prologue, we save registers that may be needed after the call (normally R10/R11) and place parameters.  The middle step- calling the subrouting- uses the ```call``` keyword.  In the epilogue, we restore saved registers to where they were and remove parameters from stack if applicable.
+
+ *Callee Convention* has multiple parts.  Before the body of the function (the prologue), you must allocate local variables by making space on the stack.  Do this by directly modifying the stack pointer and decrement it by total bytes of local vars (```sub rsp, 8```).  You also must save callee registers- the registers that the callee shouldn't be able to change or access (rbx, rdb, r12-r15).  The Epilogue return value to rax, restores callee-saved registers, deallocates local vars, and returns.
