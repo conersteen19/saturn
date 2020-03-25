@@ -702,3 +702,50 @@ Some common instructions:
 - ```add <first>, <second>``` and ```sub <first>, <second>```: add and subtract values.  Stores in first value given.
 - ```inc <src>``` and ```dec <src>```: Adds/subtracts one from given src.
 - ```imul <src>, <>, <> (optional)```: multiplies values and stores.  If only two given, multiplies and stores in first.  If 3 given, multiplies second and third term, storing in the first.  Works the same for ```idiv <>, <>, <>```
+- ```and <val1>, <val2>```: performs and on the two values.  Works same for ```or``` and ```xor```.  Stored in first parameter.
+- ```jmp <val>```: jumps to certain register.
+- ```cmp <op1>, <op2>```: holds the compare between two given values.
+- Many conditional jumps (```jne, jz, jg, jge, jl, jle, js, etc.```)
+- ```call <label>```: computes address of next instruction and pushes to stack then unconditionally jumps to label.
+- ```ret```: Return.  Pops address from stack and jumps there.
+
+## 3/23/20
+Example Assembly:
+```
+section .data
+n	DQ 5
+i	DQ 1
+sum	DW 0
+
+section .text
+loop:	mov rcx, [i]
+	cmp rcx, [n]
+	jg endOfLoop:
+	add [sum], rcx
+	inc qword [i]
+	jmp loop
+endOfLoop:
+```
+Calling a subroutine:
+```
+
+```
+Note this is a **Calling Convention**- this is done for consistency through code.
+
+*C Calling Convention* is used for multiple programming languages to communicate with assembly the same way and work with each other.  This convention makes great use of the stack (push, pop, call, ret) and is implemented commonly for recursion.
+
+First 6 parameters are put in registers.  If more than that, they get pushed on stack.  Registers saved on stack.  Local vars are put in memory on the stack.  Return value is placed in rax register.'
+
+When we call, the *caller* is the function doing the calling and the *callee* is the one being called.
+
+Register use:
+- RAX: used for return val
+- RDI, RSI, RDX, RCX, R8, R9: used for parameter passing
+- R10, R11: registers that may be modified by callee
+	- For a caller to save these values, they must be pushed on the stack
+- RBX, RBP. R12-R15: cannot be modified by subroutine callee
+- RSP: should almost never be modified; points to top of stack
+
+Variable number of arguments can be done multiple ways: method overloading, default parameters, or variable arguments.  You can make a function that takes in an elipses number of values.  Ex. ```doubel average (int num, ...) {___}``` where ```...``` is filled with a variable number of parameters and num is the number of parameters given.  This num var is required.  An example is the ```printf``` function in C (write string with %\_s and fills in the specifiers).
+
+## 3/25/20
