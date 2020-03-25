@@ -726,10 +726,6 @@ loop:	mov rcx, [i]
 	jmp loop
 endOfLoop:
 ```
-Calling a subroutine:
-```
-
-```
 Note this is a **Calling Convention**- this is done for consistency through code.
 
 *C Calling Convention* is used for multiple programming languages to communicate with assembly the same way and work with each other.  This convention makes great use of the stack (push, pop, call, ret) and is implemented commonly for recursion.
