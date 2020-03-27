@@ -7,6 +7,8 @@ This guide is a complation of knowledge used for network engineering, virtualiza
 
 [Firewalling on Palo Alto](firewalling_paloalto.md)
 
+[Palo Alto CLI Lookup Guide](firewalling_paloalto_lookup.md)
+
 ## Linux
 [Linux Basics- Debian/Ubuntu](linux_basics_deb.md)
 
