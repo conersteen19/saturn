@@ -748,3 +748,10 @@ Variable number of arguments can be done multiple ways: method overloading, defa
 *Caller Convention* has two key parts: a prologue and an epilogue.  In the prologue, we save registers that may be needed after the call (normally R10/R11) and place parameters.  The middle step- calling the subrouting- uses the ```call``` keyword.  In the epilogue, we restore saved registers to where they were and remove parameters from stack if applicable.
 
  *Callee Convention* has multiple parts.  Before the body of the function (the prologue), you must allocate local variables by making space on the stack.  Do this by directly modifying the stack pointer and decrement it by total bytes of local vars (```sub rsp, 8```).  You also must save callee registers- the registers that the callee shouldn't be able to change or access (rbx, rdb, r12-r15).  The Epilogue return value to rax, restores callee-saved registers, deallocates local vars, and returns.
+ 
+ ## 3/27/20
+ *Activation Record*: The things pushed to a stack when a subroutine is called.  Includes registers, parameters, local vars, and return address.  This information is static and is always constant.
+ 
+ Dynamic memory is stored on the heap.  This means memory is divided into 3 areas: binary program space, dynamic memory (heap), and static memory (stack).  Memory is ordered by loading your program at the beginning of memory with the heap right after it, growing forwards.  The stack starts at the end and grows backwards.  Most OSs restrict the size the stack can grow but not the heap.
+ 
+ *Stack Smashing*: Writing too far in the stack and modifying data you shouldn't be.  Major security flaw.  Also known as buffer overflow.
