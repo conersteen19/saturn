@@ -755,3 +755,43 @@ Variable number of arguments can be done multiple ways: method overloading, defa
  Dynamic memory is stored on the heap.  This means memory is divided into 3 areas: binary program space, dynamic memory (heap), and static memory (stack).  Memory is ordered by loading your program at the beginning of memory with the heap right after it, growing forwards.  The stack starts at the end and grows backwards.  Most OSs restrict the size the stack can grow but not the heap.
  
  *Stack Smashing*: Writing too far in the stack and modifying data you shouldn't be.  Major security flaw.  Also known as buffer overflow.
+
+## 3/30/20
+*Inheritance in C++*: Works similar in theory to Java, weird execution.  Example:
+
+```c++
+class Name {
+	public:
+		Name(void) : myName("") {}
+		~Name(void) {}
+		void SetName(string theName) {
+			myName = theName;
+		}
+		void print(void) {
+			cout << myName << endl;
+		}
+	private:
+		string myName;
+};
+
+class Contact: public Name {
+	public:
+		Contact(void) {
+			myAddress = "";
+		}
+		<deconstructor>
+		<SetAddress>
+		void print(void) {
+			Name::print();
+			cout << myAddress << endl;
+		}
+	private:
+		string myAddress;
+};
+```
+Note myName isn't accessable from the Contact class because it is private.  You must call classes from the Name class to get it.
+
+Example: consider inserting a node to a tree with a Comparable interface.  You may need the object class to inheret multiple other classes:
+```c++
+class Sphere : public Shape, public Comparable, public Serializable {...}
+```
