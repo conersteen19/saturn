@@ -795,3 +795,30 @@ Example: consider inserting a node to a tree with a Comparable interface.  You m
 ```c++
 class Sphere : public Shape, public Comparable, public Serializable {...}
 ```
+This can lead to problems with duplicate methods and other issues.
+
+## 4/1/20
+*Static vs Dynamic Dispatch*: Decision on which function to use at different times.  Static decides at compile time, dynamic at run time.  It can be defined statically by calling the method specifically in your code:
+```cpp
+Person *p;
+if (user_input) {
+	p = new Student();
+} else {
+	p = new Person();
+}
+p->print();
+```
+This is the default for C++ because it is faster.  Dynamic dispatch uses the ```virtual``` keyword to pick which dispatch to use.  It will go as far down the subclass tree- or as specific- as possible.  Java defaults to this; it is slower but easier to work with.
+
+C++ stores this information in the *Virtual Method Table*.  This is an array stored somewhere random in memory and had a list of all the methods in the object.  As your embed objects, the method array is updated to point to other objects and that is called.   Lots of overhead.
+
+*Abstract Classes* are made by putting the ```virtual``` keyword in front methods in a function.  This means it doesn't need to be writted in a .cpp file and is thus virtual.  Example:
+```cpp
+class shape {
+	public:
+		virtual void draw() = 0;
+};
+```
+What happens when you have double relationships- i.e. have two parents point to the same grandparent?  This is called shared multiple inheritance.  What about two grandparents of the same type from two different parents?  This is called replicated inheritance.  Non-replicated languages just break when this occurs.  Mix-in uses fake multiple inheritance with interfaces- an example is Java.
+
+C++11 features: Fixes deep copy and allows for a pointer reference, ...
