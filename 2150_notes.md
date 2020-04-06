@@ -821,4 +821,18 @@ class shape {
 ```
 What happens when you have double relationships- i.e. have two parents point to the same grandparent?  This is called shared multiple inheritance.  What about two grandparents of the same type from two different parents?  This is called replicated inheritance.  Non-replicated languages just break when this occurs.  Mix-in uses fake multiple inheritance with interfaces- an example is Java.
 
-C++11 features: Fixes deep copy and allows for a pointer reference, ...
+## 4/3/20
+C++11 features:
+- Range based for loops
+- Pointer and reference updates with deep copy
+- New function method syntax: return type at end
+- NULL now has better type checking
+- Smart pointers with memory management algorithms that deallocate for you: auto_ptr, unique_ptr, shared_ptr, weak_ptr
+- Long long int type guarenteed at least 64 bits
+
+*Priority Queues*: Some things have high priority than others.  A priority queue must have 3 operations: insers, findMin, and deleteMin.  We say that the smallest number has the highest priority.  To make this work as fast as intended, we use a binary heap.
+
+*Binary Heap*: A type of binary tree that is completely filled as it goes down except the bottom layer works left to right.  If you consider this tree mapped to an array, the left child is at 2i, right child at 2i + 1, and parent at floor(i/2).  Note for this to work the root is stored at value 1.  Very space efficient... no pointers and compact with dynamic memory.  Runs quickly (especially in cache and use of multiply/add).  Ordering: value of node is greater than its parent's value.  This makes them partially ordered and the least val is always at the root.  Methods:
+
+- insert: put the node in next spot in tree and swap with parent until meets requirements.
+- delete: insert max value at node to delete and shift it down accordingly to get to last spot.  Replace/delete node from there.
