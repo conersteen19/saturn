@@ -834,5 +834,12 @@ C++11 features:
 
 *Binary Heap*: A type of binary tree that is completely filled as it goes down except the bottom layer works left to right.  If you consider this tree mapped to an array, the left child is at 2i, right child at 2i + 1, and parent at floor(i/2).  Note for this to work the root is stored at value 1.  Very space efficient... no pointers and compact with dynamic memory.  Runs quickly (especially in cache and use of multiply/add).  Ordering: value of node is greater than its parent's value.  This makes them partially ordered and the least val is always at the root.  Methods:
 
-- insert: put the node in next spot in tree and swap with parent until meets requirements.
-- delete: insert max value at node to delete and shift it down accordingly to get to last spot.  Replace/delete node from there.
+- insert: put the node in next spot in tree and swap with parent until meets requirements.  Worse case log(n) but expected linear time insertion.
+- deleteMin: move the bottom node to the root.  Swap down with less of two children until it fits.  Expected log(n) time.
+- findMin: always the root node.
+- decreaseKey: increase priority number, percolate up
+- increaseKey: decrease priority number, percolate down
+	- worse case for these two is worst case (n) because they require a find or searching for any given element.  Unless you have stored where the node is.
+
+## 4/6/20
+Another one of the "fast" sorts is *heapsort*.  You insert n elements and then remove n elements- insert and remove both take log(n) time making it run in nlog(n) time.  Not commonly used because it isn't stable- different runs can result in different element sorts when duplicates exist.
