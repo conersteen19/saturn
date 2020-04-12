@@ -843,3 +843,17 @@ C++11 features:
 
 ## 4/6/20
 Another one of the "fast" sorts is *heapsort*.  You insert n elements and then remove n elements- insert and remove both take log(n) time making it run in nlog(n) time.  Not commonly used because it isn't stable- different runs can result in different element sorts when duplicates exist.
+
+## 4/8/20, 4/10/20
+*File Compression*: Used to help send things over network efficiently, more space efficient storage.  Some need to be compressed and decompressed perfectly, others can lose some data.  Lossless: no data loss (ex. gzip, zip, png, around 4:1 ratios); Lossy: some data is lost (ex. JPEG, MP3, MPEG, around 10:1 ratios); Compression ratio: Origonal size / compressed size (in bits).  We want to try lossless compression.
+
+*Huffman Coding*: Use frequencies of symbols in a string to build prefix codes.  The more frequent, the less bits we use to represent it.  No codes start with the same string (i.e. if a = 1, every next prefix must start with a 0).  
+
+Huffman Decoding: Given a sequence of bits of a full binary search tree, let 0 go left and 1 go right.  Follow the letter codes down the tree and when a prefix ends, you are at that letter in the tree.  Decoding ex. if A = 0, B = 100, C = 101, and D = 11, 1110001010011 -> 11 100 0 101 0 0 11 -> DBACAAD.
+
+Cost of a file: (C(T) = p1r1 + p2r2 + ... + pnrn) where pi is the frequency and ri is the length of the prefix.
+
+Process:
+1) Read through the file to determine the character's frequencies in the huffman tree.
+1) Put these values in a minHeap.  Make sure you have a tree of pointers to huffman tree nodes.
+1) Build huffman tree: Take first two nodes out of tree with lowest frequency and make them children of a new node who has a frequency of those two nodes added together.  Put that node back in your tree.  Repeat this process until your minHeap is one tree.
