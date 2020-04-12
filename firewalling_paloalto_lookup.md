@@ -2,54 +2,75 @@
 
 [Application Lookup](https://applipedia.paloaltonetworks.com/)
 
-## Look up command
+## General
+Restart machine
 ```
-# find command keyword <key>
+> request system restart
+```
+Look up command
+```
+>/# find command keyword <key>
+```
+Note this only shows commands accessable in either general or configure mode, not all possible options.
+
+## Committing and Monitoring
+Commit
+```
+>/# commit
+```
+Show current commits and jobs
+```
+>/# show jobs
+>/# show jobs id <number>
+```
+Show config differences
+```
+>/# show config diff
+```
+Show/end active sessions
+```
+> show admins
+> delete admin-sessions username <user>
 ```
 
-## Show current commits and jobs
-```
-> show jobs
-```
-
-## Update anti-virus software
+## Updates
+Update anti-virus software
 ```
 > request anti-virus upgrade check
 > request anti-virus upgrade download latest
 > request anti-virus upgrade install version latest
 ```
 
-## Restart box
+## Deviceconfig
+Set permitted IPs to access Web Box
 ```
-> request system restart
+set deviceconfig system permitted-ip <ip addr>/<netmask>
+```
+Change Mgt Config Access settings
+```
+set deviceconfig system service <disable-xxxx> <yes/no>
 ```
 
-## Move Rules
-```
-# move rulebase security rules "<name>" <top/bottom/above/below> "<name>"
-```
-
-## Change admins creds
+## Mgt-config
+Change admins creds
 ```
 # set mgt-config users admin password
 ```
-
-## Delete user
+Delete user
 ```
 # delete mgt-config users <name>
 ```
 
-## Set permitted IPs to access Web Box
-```
-set deviceconfig system permitted-ip <ip addr>/<netmask>
-```
-
-## Work with applications
+## Profiles
+Work with applications
 ```
 set applicaiton <name> ...
 ```
 
-## Change Mgt Config Access settings
+## Rulebase
+Move Rules
 ```
-set deviceconfig system service <disable-xxxx> <yes/no>
+# move rulebase security rules "<name>" <top/bottom/above/below> "<name>"
 ```
+
+## Logging
