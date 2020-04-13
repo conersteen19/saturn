@@ -856,4 +856,21 @@ Cost of a file: (C(T) = p1r1 + p2r2 + ... + pnrn) where pi is the frequency and 
 Process:
 1) Read through the file to determine the character's frequencies in the huffman tree.
 1) Put these values in a minHeap.  Make sure you have a tree of pointers to huffman tree nodes.
-1) Build huffman tree: Take first two nodes out of tree with lowest frequency and make them children of a new node who has a frequency of those two nodes added together.  Put that node back in your tree.  Repeat this process until your minHeap is one tree.
+1) Build huffman tree: Take first two nodes out of tree with lowest frequency (removeMin x2) and make them children of a new node who has a frequency of those two nodes added together.  Put that node back in your tree.  Repeat this process until your minHeap is one tree.
+1) Find prefix codes.  Right = 1, Left = 0.  Write them to a file.
+1) Go through expression to encode and write new expression using prefix codes.
+
+## 4/13/20
+*Graph*: Series of nodes connected to each other.  G = (V, E) where V are verticies and E are edges in the form (v, w) where v and w are elements of V.  Graphs can be ordered or unordered, i.e. you can only travel one direction along ane edge.  You can have a *path*, or a list of verticies to get from one vertex to another.  Paths have a length (# of verticies) and can be simple (no reptitions of verticies).  Graphs can also have weights or give different paths different priorities based on user determined values.  Cycles are paths that start and end at the same place.  Connected graphs have a path from every vertex to every other vertex.  Complete graphs have an edge betweeen every vertices.  
+
+*Directed Acyclic Graph (DAG)*: no cycles, can be strong (path from vertex to every other vertex) or weak (underlying undirected graph is connected).
+
+*Adjacency Matrix*: Way to show how nodes are connected to each other.  Label each node, make them rows and columns and put a mark where an edge exists.  Good for directioned graphs.  Can also be made as an array of linked lists of connecting nodes which is much more efficient in larger data sets.
+
+*Topological Sort*: Construct ordering property such that if a node has a path to another node it appears before it in the sort. Algorithm:
+
+- Define indegree as number of edges into a node.
+- Check if node(s) of indegree 0.
+- Remove edges leaving that node and add it to your list.  Recalculate indegree for all nodes (or subtract as you remove nodes).
+- Repeat while moving up indegree when no more exist.
+
