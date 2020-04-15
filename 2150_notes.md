@@ -874,3 +874,9 @@ Process:
 - Remove edges leaving that node and add it to your list.  Recalculate indegree for all nodes (or subtract as you remove nodes).
 - Repeat while moving up indegree when no more exist.
 
+## 4/15/20
+Topological sort can be done n^2 time the slow way but can be improved using a queue and adding values of indegree 0 to queue and checking values as your decrement them.  This makes it run faster but doesn't improve the worst case by that much (v^2).
+
+*Single source shortest path*: Find shortest path from vertex s to every other vertex in a graph assumuing path length.  Commonly used breath-first search: check all edges from a node before diving down specific paths.  Unweighted shortest paths use a queue- pop a node, check its connections, make new paths and push them to queue.  Not very fast- n^2.  Dijkstra's Algorithm works with the weighted edges case and makes the 'best' choice at every point.
+
+Dijkstra's Algorithm stars with each vertex's distance at infinity.  Start at given vertex, see what its connected to.  If it is less than that vertex's existing distance, update the distance to the shorter value.  Repeat until every node has been read.
