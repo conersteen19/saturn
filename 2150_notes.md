@@ -880,3 +880,10 @@ Topological sort can be done n^2 time the slow way but can be improved using a q
 *Single source shortest path*: Find shortest path from vertex s to every other vertex in a graph assumuing path length.  Commonly used breath-first search: check all edges from a node before diving down specific paths.  Unweighted shortest paths use a queue- pop a node, check its connections, make new paths and push them to queue.  Not very fast- n^2.  Dijkstra's Algorithm works with the weighted edges case and makes the 'best' choice at every point.
 
 Dijkstra's Algorithm stars with each vertex's distance at infinity.  Start at given vertex, see what its connected to.  If it is less than that vertex's existing distance, update the distance to the shorter value.  Repeat until every node has been read.
+
+## 4/17/20
+Dijkstra's technically runs in n^2 time using basic loops but this can be improved.  Using adjacency lists and heaps you can make it nlogn.  More specifically, (edges)log(verticies).  Dijkstra's breaks with negative cost edges, must use Bellman-Ford.
+
+GPS' have too many nodes to process if they worked with a massive list of nodes and edges.  They work by using varying levels of complexity: bighways to large areas, main roads to closer, and side roads to the exact place.  Modern GPS systems update the speed on the roads live and reprocessing the algorithm.
+
+Traveling Salesperson Problem (TSP):  What is the minimum cycle that hits all possible nodes assuming the graph is fully connected?  This is a n! algorithm, aka really really slow.  A hamiltonial path is a path that hits every node exactly once, cycle hits everything once and ends where it begins.  This means that the TSP is finding a minimum hamiltonian cycle.  This makes the problem is NP-complete and no more efficient solution is known.
