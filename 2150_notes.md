@@ -887,3 +887,15 @@ Dijkstra's technically runs in n^2 time using basic loops but this can be improv
 GPS' have too many nodes to process if they worked with a massive list of nodes and edges.  They work by using varying levels of complexity: bighways to large areas, main roads to closer, and side roads to the exact place.  Modern GPS systems update the speed on the roads live and reprocessing the algorithm.
 
 Traveling Salesperson Problem (TSP):  What is the minimum cycle that hits all possible nodes assuming the graph is fully connected?  This is a n! algorithm, aka really really slow.  A hamiltonial path is a path that hits every node exactly once, cycle hits everything once and ends where it begins.  This means that the TSP is finding a minimum hamiltonian cycle.  This makes the problem is NP-complete and no more efficient solution is known.
+
+## 4/20/20
+*Minimum Spanning Tree*: Turning a graph into a tree.  Is a subgraph that contains every vertex but not all edges and doesn't include cycles.  Can be constructed by finding and breaking cycles and we want the one with the minimum weight.  Two algorithms:
+
+- Prim's Alg: Set of known and unknown verticies.  Loop through and add one vertex to the known set and find a minimum safe edge and add that node to the tree.  This runs the same speed as Dijkstra's (e log(v) when optminized but n^2 when not).
+- Kruskal's Alg: Grow a forest out of edges that do not create a cycle.  Loop through edges that connect nodes already connected to the tree and are of minimum weight and add node/edge to the graph until everything connects.  Same optimized time as Prim's.
+
+Memory Notes: Scoped memory opens and closes during the program, unlimited lasts until program ends.  Scoped known data is local variable declarations, scoped unknown is made with alloca(), unlimited known are global/static variables, and unlimited unknown vars are made with new and malloc().  alloca() works like new and malloc() (new but for C) except on the stack instead of the heap.  malloc() is used like:
+
+```c
+char *s = (char *) malloc (sizeof(*s) *n);
+```
