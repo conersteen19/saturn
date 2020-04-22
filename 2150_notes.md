@@ -899,3 +899,10 @@ Memory Notes: Scoped memory opens and closes during the program, unlimited lasts
 ```c
 char *s = (char *) malloc (sizeof(*s) *n);
 ```
+
+## 4/22/20
+The heap has to be managed.  This is done two way- fixed size blocks and buddy blocks.  Fixed size keeps a list of free blocks and the appropriate number of these sizes are allocated when necessary.  Extremely inefficient and wasted space.  Buddy blocks are separated by powers of two.  When you need a certain data chunk you get the power of two closest and largest to the space you need.  Better than fixed size but still wastes space when you don't get close to a power of two (or just under the previous one).
+
+This process is very slow.  Memory occasionally needs to be expanded so it transfers control to the OS and then is given control back- this is very slow.
+
+We can start to speed programs up using cache.  When you load a page, you load the page into all of your cache layers.  Cache overwrites the oldest loaded page to make space for a new one.  A hit is when data is in the cache and a miss is when it isn't.  We use cache in terms of locality- temporal locality is a value that is often accessed makes it efficient to keep in cache, spacial cache works because when you access something you are likely to access a nearby value as well.  That makes pulling a whole page efficient instead of just a single value.  Working with cache- aka properly keeping values in a page to reduce access time- can reduce runtimes by large integer factors (50+).
