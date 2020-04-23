@@ -26,5 +26,3 @@ Nothing yet!
 
 ## Programming
 [CS 2150 Notes](2150_notes.md)
-
-test
