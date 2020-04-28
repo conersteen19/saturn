@@ -906,3 +906,14 @@ The heap has to be managed.  This is done two way- fixed size blocks and buddy b
 This process is very slow.  Memory occasionally needs to be expanded so it transfers control to the OS and then is given control back- this is very slow.
 
 We can start to speed programs up using cache.  When you load a page, you load the page into all of your cache layers.  Cache overwrites the oldest loaded page to make space for a new one.  A hit is when data is in the cache and a miss is when it isn't.  We use cache in terms of locality- temporal locality is a value that is often accessed makes it efficient to keep in cache, spacial cache works because when you access something you are likely to access a nearby value as well.  That makes pulling a whole page efficient instead of just a single value.  Working with cache- aka properly keeping values in a page to reduce access time- can reduce runtimes by large integer factors (50+).
+
+## 4/27/20
+Esoteric Programming Languages: Designed to make coding hard.
+
+Intercal: A programming language without a pronounceable acronym.  Requires please sometimes, constants are complicated and no negatives, ```.``` represents 16bit, ```:``` represents 32bit, ```,``` makes an array.  ```$``` interleaves bits- alternating merging of bits.  Works with commands followed by expressions.
+
+Whitespace: Coding with space, tab, and return.
+
+BrainF***: Minimal programming language that is turing complete.  8 character operations.
+
+Polygots: Programs that compile and work in multiple languages.
