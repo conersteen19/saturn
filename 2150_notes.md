@@ -695,7 +695,7 @@ You can leave a variable undeclared with a question mark.  You can declare an ar
 
 Some common instructions:
 - ```mov <dest>, <src>```: more like a copy command.  Can specify a register, constant, var name, pointer.  ```movl``` moves a double word, ```movq``` moves quad word, etc.  We can just write mov and the assembler will change that for us.  You can do basic arithmatic (multiplication, addition, subtraction) before a mov to save a step.  Note you cannot subtract registers from another, can't add more than 2 registers, or do multiple multiplications.  Also note that destinations cannot be constant and you cannot access memory twice in one instruction (memory not fast enough).
-- ```[___]```: works like a pointer.  Follows the trail to the regsiter and takes that value, this is how you dereference.
+- ```[___]```: works like a pointer.  Follows the trail to the regsiter and takes that value, this is how you dereference.  We can use this to pull addresses out of something like an array, i.e. \[ rsi + 4 * rbx\] and assume rsi holds the array start location and rbx is the index and 4 is the length of the ints in the array
 - ```lea <dest>, <src>```: load effective address.  Gets address of a thing, such as a variable.  Opposite of the brackets.
 - ```push <src>```: pushes an item to the stack.  ```pushq``` and other similar commands exist depending on size of data.  The stack exists starting at the bottom of memory and working its way up.
 - ```pop <dest>```: pops item off of stack and puts it in destination given.
