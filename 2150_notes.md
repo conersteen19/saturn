@@ -693,8 +693,18 @@ x86 allows you to create a seperate data section.  Specify variable names and va
 
 You can leave a variable undeclared with a question mark.  You can declare an array with comma seperated values or declare the data type as ```times <number of elements> <size of data>```.  Strings are stored as char arrays from quotes.
 
+Commands are generally done with targets.  These targets can be a register, constant, var name, or pointer dereference (ex. \[rbx\]).  In these commands you can do addition, subtraction, and multiplication.  Rules as follows:
+- You cannot subtract 2 registers
+- You cannot do commands with more than 2 registers in the command
+- You cannot do multiple multiplications
+- The 'max' you can really do is \[4\*rax+rbx+12\]
+- You cannot access memory twice in one instruction- i.e. only one set of square brackets
+- You can't send a value to a constant or do operations on a destination without square brackets.  These statements are ambiguous.
+
+To move to a variable, specify the dest as \[var_name\].
+
 Some common instructions:
-- ```mov <dest>, <src>```: more like a copy command.  Can specify a register, constant, var name, pointer.  ```movl``` moves a double word, ```movq``` moves quad word, etc.  We can just write mov and the assembler will change that for us.  You can do basic arithmatic (multiplication, addition, subtraction) before a mov to save a step.  Note you cannot subtract registers from another, can't add more than 2 registers, or do multiple multiplications.  Also note that destinations cannot be constant and you cannot access memory twice in one instruction (memory not fast enough).
+- ```mov <dest>, <src>```: more like a copy command.  ```movl``` moves a double word, ```movq``` moves quad word, etc.  We can just write mov and the assembler will change that for us.
 - ```[___]```: works like a pointer.  Follows the trail to the regsiter and takes that value, this is how you dereference.  We can use this to pull addresses out of something like an array, i.e. \[ rsi + 4 * rbx\] and assume rsi holds the array start location and rbx is the index and 4 is the length of the ints in the array
 - ```lea <dest>, <src>```: load effective address.  Gets address of a thing, such as a variable.  Opposite of the brackets.
 - ```push <src>```: pushes an item to the stack.  ```pushq``` and other similar commands exist depending on size of data.  The stack exists starting at the bottom of memory and working its way up.
