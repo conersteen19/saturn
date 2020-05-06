@@ -927,3 +927,5 @@ Whitespace: Coding with space, tab, and return.
 BrainF***: Minimal programming language that is turing complete.  8 character operations.
 
 Polygots: Programs that compile and work in multiple languages.
+
+---END OF SEMESTER---
