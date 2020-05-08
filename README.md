@@ -1,6 +1,6 @@
 # Saturn- an Engineering Guide
 This guide is a complation of knowledge used for network engineering, virtualization techniques, and other general knowledge one may find useful.
-## Networking Introduction and Devices
+## Networking
 [Networking Basics](networking_basics.md)
 
 [Switching on CiscoIOS](switching_ciscoios.md)
@@ -19,12 +19,13 @@ This guide is a complation of knowledge used for network engineering, virtualiza
 [Ansible](ansible.md)
 
 ## Windows
-Nothing yet!
+Nothing yet!  Ask [Jake](https://github.com/ion28) about it...
 
 ## Programming
 [CS 2150 Notes](2150_notes.md)
 
 ## Web
+HTML/CSS Basics - Coming Soon!
 Jquery - Coming Soon!
 
 ## CAD - Coming Soon!
