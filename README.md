@@ -31,4 +31,7 @@ HTML/CSS Basics - Coming Soon!
 
 Jquery - Coming Soon!
 
-## CAD - Coming Soon!
+Bootstrap Studio - Coming Soon
+
+## CAD
+Coming Soon!
