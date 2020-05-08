@@ -23,6 +23,7 @@ Nothing yet!  Ask [Jake](https://github.com/ion28) about it...
 
 ## Programming
 [CS 2150 Notes](2150_notes.md)
+Basic Code Repository - Coming Soon!
 
 ## Web
 HTML/CSS Basics - Coming Soon!
