@@ -16,7 +16,7 @@ Note this only shows commands accessable in either general or configure mode, no
 ## Committing and Monitoring
 Commit
 ```
->/# commit
+# commit
 ```
 Show changes pending commit
 ```
@@ -30,6 +30,10 @@ Show current commits and jobs
 Show config differences
 ```
 >/# show config diff
+```
+Revert to old config
+```
+# revert config
 ```
 Show/end active sessions
 ```
@@ -74,7 +78,7 @@ Change dns servers
 # set deviceconfig system dns-settting servers primary <server>
 # set deviceconfig system dns-settting servers secondary <server>
 ```
-Change management config Access settings
+Change management config access settings
 ```
 # set deviceconfig system service <disable-xxxx> <yes/no>
 ```
@@ -126,7 +130,7 @@ Set password requirements/complexity
 # set mgt-config password-complexity ...
 ```
 
-## Networking
+## Networking (Interfaces and Zones)
 Configure interface/ethernet port
 ```
 # set network interface ethernet ethernet1/x <type, ususally layer3 or virtual wire> ...
@@ -135,15 +139,18 @@ Set interface/ethernet port ip address
 ```
 # set network interface ethernet ethernet1/x layer3 ip <ip addr/netmask>
 ```
+Set interface/ethernet port as virtual wire
+```
+# set network interface ethernet ethernet1/x virtual-wire 
+```
 Add interface/ethernet port to zone
 ```
 # set zone <name> network layer3 [ ethernet1/x ... ]
 ```
-
 ## Profiles
 Work with applications
 ```
-# set applicaiton <name> ...
+# set application <name> ...
 ```
 
 ## Rulebase
