@@ -4,54 +4,15 @@
 
 *Virtual Wire*: An ability of PAs that allows them to appear invisible on the network but still scan and apply rules to traffic as it passes through the firewall.
 
+*Layer3*: A generic configuration of a port that allows it to gain an IP address.  Generally used for normal firewall operations such as traffic management and DHCP.
+
 *Wildfire*: PAs ability to capture unknown files/EXEs to test what they do in a virtual environment and block them in the future.  Requires communication with the Palo Alto Cloud- tests are not done locally.
 
-## Command Line Actions
-*Note no actions are applied without a __COMMIT__!!!*
+## Configuration Notes
+When setting up a Palo, the first work that needs to be done is securing/configuring the management interface.  This is usually done via command line by console connection.  Set a static ip and get into the web portal.  It is important to make sure you have a secure user and restrict access to only certain types of communication (ssh, https).  After you give it a static ip, you can access the management interface.
 
-*Commands should be done in ```configure``` mode*
+After getting your management interface set up and making sure you have access to the web portal, updates should be done to make sure your box is up to date.  Update the OS then the anti-malware package and set up to auto check and update.  To do this you need to let your management interface access the internet.
 
-Change admin password:
-```
-set mgt-config users admin password
-```
-Restart the system
-```
-request restart system
-```
-Set management IP, Netmask, and Default-Gateway
-```
-set deviceconfig system ip-address
-set deviceconfig system subnet
-set deviceconfig system default-gateway
-```
+Once you are updated, set up your other interfaces appropriatly.  You generally want to do either a virtual wire or a layer3 interface.  Virtual wires act as a passthrough for traffic and just apply firewall rules.  Layer3 makes the ports have an IP address and act as a hop when going to or from a machine.  Virtual wires are good for applying rules without others knowing you're there while layer3 interfaces are better for more traditional firewalling.  After configuring interfaces, add your interfaces to zones, generally "inside" and "outside" are used.  There are commonly used in rules to specify traffic direction instead of using unique interfaces.
 
-
-## Web Configuration Actions
-*Note no actions are applied without a __COMMIT__!!!*
-### Configuration
-
-Set a static IP
-
-Pull Licensing/Get updates from PA
-
-//Note on ARP spoofing
-
-Set static ARP/DNS entries (for licensing)
-
-Pull Licensing/Get updates from PA
-
-### Manage accounts
-Create Accounts
-
-Delete User
-
-### Rules
-
-### Misc
-
-Configure wildfire
-
-VOIP in PA
-
-Configure ‘anti-’ blocking
+## Rules
