@@ -52,7 +52,8 @@ HTML has tons of included tags that do a myriad of different things.  Here are s
 -```<col></col> and <row></row>```: used to make tables in HTML.  More commonly used with bootstrap.
 
 ## CSS basics
-
+Coming soon!
 ## Useful CSS modifiers
-
+Coming soon!
 ## Javascript Basics
+Coming soon!
