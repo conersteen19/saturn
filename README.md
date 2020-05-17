@@ -27,7 +27,7 @@ Nothing yet!  Ask [Jake](https://github.com/ion28) about it...
 Basic Code Repository - Coming Soon!
 
 ## Web
-HTML/CSS Basics - Coming Soon!
+[Web Basics](web_basics.md)
 
 Jquery - Coming Soon!
 
