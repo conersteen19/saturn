@@ -179,30 +179,19 @@ Create service-group
 ```
 Create anti-malware profile
 ```
-# set profiles virus <name> packet-capture yes decoder ftp action drop
-# set profiles virus <name> packet-capture yes decoder http action drop
-# set profiles virus <name> packet-capture yes decoder http2 action drop
-# set profiles virus <name> packet-capture yes decoder imap action drop
-# set profiles virus <name> packet-capture yes decoder pop3 action drop
-# set profiles virus <name> packet-capture yes decoder smb action drop
-# set profiles virus <name> packet-capture yes decoder smtp action drop
+# set profiles virus <name> packet-capture yes decoder <type> action <action>
 ```
 Create anti-spyware profile
 ```
-# set profiles spyware <name> rules all category any packet-capture extended-capture severity any action drop
+# set profiles spyware <name> rules all category <cat> packet-capture <pcap-type> severity <sev> action <action>
 ```
 Create vulnerability protection profile
 ```
-# set profiles vulnerability <name> rules all category any host any packet-capture extended-capture threat-name any severity any cve any vendor-id any action drop
+# set profiles vulnerability <name> rules all category <cat> host <host> packet-capture <pcap-type> threat-name <name> severity <sev> cve <cve> vendor-id <v-id> action <action>
 ```
 Create DOS protection profile
 ```
-# set profiles dos-protection <name> flood icmp enable yes
-# set profiles dos-protection <name> flood icmpv6 enable yes
-# set profiles dos-protection <name> flood other-ip enable yes
-# set profiles dos-protection <name> flood tcp-syn enable yes
-# set profiles dos-protection <name> flood udp enable yes
-# set profiles dos-protection <name> resource sessions enabled yes
+# set profiles dos-protection <name> flood <protocol> enable <yes/no>
 ```
 Create profile-group
 ```
