@@ -31,6 +31,11 @@ Show config differences
 ```
 >/# show config diff
 ```
+Validate a config
+```
+>/# validate full
+> show jobs id <id>
+```
 Revert to old config
 ```
 # revert config
@@ -147,16 +152,82 @@ Add interface/ethernet port to zone
 ```
 # set zone <name> network layer3 [ ethernet1/x ... ]
 ```
+
 ## Profiles
-Work with applications
+Make application by protocol/port
 ```
-# set application <name> ...
+# set application <name> default port <tcp/udp>/<ports, xxxx-xxxx> 
+```
+Define custom application by groups
+```
+# set application <name> category <cat>
+# set application <name> subcategory <subcat>
+# set application <name> technology <tech>
+<set capabilities as pertinent>
+```
+Make application group
+```
+# set application-group <name> members [ <apps> ]
+```
+Create service
+```
+# set service <name> protocol <tcp/udp> port <port> source-port <src-port>
+```
+Create service-group
+```
+# set service-group <name> members [ <services> ]
 ```
 
 ## Rulebase
-Move Rules
+Add FW Rule
+```
+# set rulebase security rules <name> from <zone> source <source_address> to <zone> destination <dest_zone> service <services> application <apps> action <allow/drop/etc>
+```
+Add NAT Rule
+```
+# set rulebase nat rules from <zone> source <ip> to <zone> destination <ip> service <service> destination-translation translated-address <trans-addr> translated-port <trans-port>
+```
+Move Rule
 ```
 # move rulebase security rules "<name>" <top/bottom/above/below> "<name>"
 ```
+Delete Rule
+```
+# delete rulebase security rules <name>
+```
+Move and delete are universal for all types of rulebases, such as NAT.
 
 ## Logging
+Show all traffic logs
+```
+> show log traffic
+```
+Filter log traffic by source/destination
+```
+> show log traffic <src/dest> <ip>
+```
+Filter log traffic by port
+```
+> show log traffic <sport/dport> <port>
+```
+Filter log traffic by zone
+```
+> show log traffic <from/to> <zone>
+```
+Filter log traffic by action
+```
+> show log traffic action equal <action>
+```
+Filter log traffic by rule
+```
+> show log traffic rule <rule>
+```
+Filter log traffic by application
+```
+> show log traffic app <app>
+```
+Show threat logs
+```
+> show log threat
+```
+Filtering works the same on all log types with different categories.
