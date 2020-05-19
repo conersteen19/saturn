@@ -177,11 +177,42 @@ Create service-group
 ```
 # set service-group <name> members [ <services> ]
 ```
+Create anti-malware profile
+```
+# set profiles virus <name> packet-capture yes decoder ftp action drop
+# set profiles virus <name> packet-capture yes decoder http action drop
+# set profiles virus <name> packet-capture yes decoder http2 action drop
+# set profiles virus <name> packet-capture yes decoder imap action drop
+# set profiles virus <name> packet-capture yes decoder pop3 action drop
+# set profiles virus <name> packet-capture yes decoder smb action drop
+# set profiles virus <name> packet-capture yes decoder smtp action drop
+```
+Create anti-spyware profile
+```
+# set profiles spyware <name> rules all category any packet-capture extended-capture severity any action drop
+```
+Create vulnerability protection profile
+```
+# set profiles vulnerability <name> rules all category any host any packet-capture extended-capture threat-name any severity any cve any vendor-id any action drop
+```
+Create DOS protection profile
+```
+# set profiles dos-protection <name> flood icmp enable yes
+# set profiles dos-protection <name> flood icmpv6 enable yes
+# set profiles dos-protection <name> flood other-ip enable yes
+# set profiles dos-protection <name> flood tcp-syn enable yes
+# set profiles dos-protection <name> flood udp enable yes
+# set profiles dos-protection <name> resource sessions enabled yes
+```
+Create profile-group
+```
+# set profile-group <name> virus <name> spyware <name> vulnerability <name> dos-protection <name> wildfire-analysis default file-blocking strict
+```
 
 ## Rulebase
 Add FW Rule
 ```
-# set rulebase security rules <name> from <zone> source <source_address> to <zone> destination <dest_zone> service <services> application <apps> action <allow/drop/etc>
+# set rulebase security rules <name> from <zone> source <source_address> to <zone> destination <dest_zone> service <services> application <apps> action <allow/drop/etc> profile-setting group <profile-group>
 ```
 Add NAT Rule
 ```
