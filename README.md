@@ -31,7 +31,7 @@ Basic Code Repository - Coming Soon!
 
 Jquery - Coming Soon!
 
-Bootstrap Studio - Coming Soon
+Bootstrap Studio - Coming Soon!
 
 ## CAD
 Coming Soon!
