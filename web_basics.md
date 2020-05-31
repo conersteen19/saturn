@@ -51,9 +51,52 @@ HTML has tons of included tags that do a myriad of different things.  Here are s
 -```<form></form>```: creates a new form.  Form has its own special tags that go inside to create forms to submit information, such as ```<input>``` for fields, ```<label>``` for normal text, and ```<button>``` for submitting.  More info on forms can be found [here](https://www.w3schools.com/html/html_forms.asp).
 -```<col></col> and <row></row>```: used to make tables in HTML.  More commonly used with bootstrap.
 
-## CSS basics
-Coming soon!
+## CSS Basics
+CSS (Cascading Style Sheet) is used to add styling and design to a HTML document.  CSS works by using selectors and applying certain modifiers to those selectors.  A basic CSS file looks like:
+```css
+body {
+  color: white;
+  background-color: blue;
+}
+```
+And must be imported to the HTML file you want it to apply to in the header with a ```link``` tag:
+```html
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+```
+CSS has a few different types of selectors:
+- Tags: Tags work just like they sound like and apply to what they describe.  For example, a ```body``` selector applies to the whole body section of the HTML document.  Important to note that tags like ```li``` will apply to EVERY list item in the whole page, not just a specific group.
+- Classes: Classes are used to select a certain group of items.  Note that the key word is group as this is designed to work for multiple items on a single page.  They are specified with a dot before the class name and a ```class``` parameter in the html tag. For example, the class ```.test``` would be applied in HTML and CSS (respectively) like:
+```html
+<p class="test">text</p>
+```
+```css
+.test {
+  color: black;
+}
+```
+- Ids: Work the same as classes but are designed to be unique for a specific tag and cannot be duplicated elsewhere in the document.  Used often as an identifier for JS.  Follows an indentical format as classes except go in the ```id``` parameter and are specific in CSS with a hashtag instead of a dot (ex. ```#test {}```).
+- Active modifiers: Used to change an item when a certain action occurs.  The most common are active and hover which modify a clicked object and an object with a mouse on it, respectively.  They are specified with another selector and a colon.  For instance, CSS for links generally bold when the mouse is over then then change color when clicked.  Code for this looks like:
+```css
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:hover {
+  font-weight: bold;
+}
+a:active {
+  color: purple;
+}
+```
+Note that CSS can also be applied directly in HTML documents two ways:
+- CSS tag in the header.  Works exactly as it sounds.  Example:
+```html
+<style>
+  body {color: red;}
+</style>
+```
+- Inline.  This applys CSS directly to an tag in the tag declaration.  Generally used to hide objects with Jquery.  Example:
+```<p style="color: white;">text</p>```
+
 ## Useful CSS modifiers
-Coming soon!
-## Javascript Basics
 Coming soon!
