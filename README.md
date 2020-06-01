@@ -24,7 +24,7 @@ Nothing yet!  Ask [Jake](https://github.com/ion28) about it...
 ## Programming
 [CS 2150 Notes](2150_notes.md)
 
-Basic Code Repository - Coming Soon!
+[Basic Code Repository](code_repo.md)
 
 ## Web
 [Web Basics](web_basics.md)
