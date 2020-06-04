@@ -80,3 +80,9 @@ iface eth1 inet manual
         bond-master bond0
         up /sbin/ifconfig $IFACE up
 ```
+## Serial Devices
+### About
+Serial devices are used to access switches, routers, and other devices.  They look like ethernet ports but normally run at different power rates, making them dangerous to plug into ethernet ports.  They WILL fry your ethernet port!  On Windows, it is easy to use puTTY to access them (as well as ssh, telnet, etc).  Using Minicom is the easiest way to access a serial port on a linux machine.
+
+
+
