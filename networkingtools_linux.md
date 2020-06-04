@@ -1,13 +1,14 @@
 # Networking Tools/Techniques for Linux
 ## /etc/network/interfaces
 ### Types
-ens/eth: Stanadard ethernet or network ports.  Can assign with DHCP or a static ip.  Can also be configured as manual to be dealt with later in the config.
-bond: Used for bonding ports together as a single unit.  Goes above ens/eth definitions and those ports should be added as slaves to the bond.
-vlan: Used to specify a vlan tag to be used by a future port or vmbr.
-vmbr: Virtual bridge.  Used to connect two different interfaces within a machine
+ens/eth: Stanadard ethernet or network ports.  Can assign with DHCP or a static ip.  Can also be configured as manual to be dealt with later in the config.\
+bond: Used for bonding ports together as a single unit.  Goes above ens/eth definitions and those ports should be added as slaves to the bond.\
+vlan: Used to specify a vlan tag to be used by a future port or vmbr.\
+vmbr: Virtual bridge.  Used to connect two different interfaces within a machine.\
+auto: automatically determines whether a port should be up or down.  Correct in most cases.  Use allow-hotplug if it waits for interfaces to start up on boot\
 
 ### Examples
-Standard DHCP format
+Standard DHCP format:
 ```
 auto lo
 iface lo inet loopback
@@ -15,18 +16,17 @@ iface lo inet loopback
 auto ens2
 iface ens2 inet dhcp
 ```
-Standard Static IP format
+Standard Static IP format:
 ```
 auto lo
 iface lo inet loopback
 
 auto ens2
 iface ens2 inet static
-	address <address>
-	subnet <subnet>
+	address <address>/<netmask,short form (ex. 24)>
 	gateway <gateway>
 ```
-Bridge Format: (bridge-utils must be installed)
+Bridge Format: (bridge-utils must be installed)  Used for connecting to kvm hosts:
 ```
 auto lo
 iface lo inet loopback
@@ -43,7 +43,7 @@ iface vmbr10 inet dhcp
    	bridge_fd 9
 ```
 
-Vlan w/out virtualization format
+Vlan w/out virtualization format:
 ```
 auto lo
 iface lo inet loopback
@@ -56,7 +56,7 @@ iface vlan10 inet dhcp
 	vlan-raw-device ens2
 ```
 
-Bond Example
+Bond:
 ```
 auto bond0
 iface bond0 inet manual
