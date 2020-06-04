@@ -14,6 +14,8 @@ This guide is a complation of knowledge used for network engineering, computer s
 
 [Networking Tools for Linux](networkingtools_linux.md)
 
+[Linux Resources and Programs](linux_resources.md)
+
 [Virtualization: KVM](kvm.md)
 
 [Ansible](ansible.md)
