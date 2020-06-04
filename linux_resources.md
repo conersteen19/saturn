@@ -1,4 +1,4 @@
-# Linux Resources
+# Linux Resources and Programs
 This file is a compliation of resources that can be used to perform various tasks.  They are meant to be hosted on Linux boxes but many can also be done on othehr operating systems
 
 **Network File System (NFS)**: Used to create a network shared folder.  Works well with Linux and files are synced on a per-file basis, unlike iSCSI.
