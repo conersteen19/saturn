@@ -15,5 +15,4 @@ To Add:
 nmon\
 atop\
 iftop - tcpip\
-bwm - interfaces\
-
+bwm - interfaces
