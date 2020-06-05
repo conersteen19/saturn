@@ -10,3 +10,10 @@ This file is a compliation of resources that can be used to perform various task
 **File Transfer Protocol (FTP)**: Used to transfer files from one machine to another.  FTP is insecure while TFTP is more secure.  Comes in a variety of flavors and is easy to configure.
 
 **Distributed Replicated Block Device (DRBD)**: Program used for high availability clusters.  Designed to allow servers to communiate with one another.  Helps with implementation of lots of backup and reliability programs such as Pacemaker.
+
+To Add:
+nmon\
+atop\
+iftop - tcpip\
+bwm - interfaces\
+
