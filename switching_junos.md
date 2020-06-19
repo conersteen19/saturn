@@ -35,6 +35,7 @@ set interfaces ge-0/0/1 unit 0 family inet address 192.168.100.1/30
 Show hardware:
 ```
 > show chassis hardware
+> show chassis routing-engine  # shows cpu usage
 ```
 Show Interfaces (shows if interfaces are up or down)
 ```
