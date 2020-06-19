@@ -9,6 +9,7 @@
 - Ports have a few modes: access (untagged), trunk, and hybrid (does both)
 - With a member-range, after you break it up it will write the range config to each port
 - Just setting a port to trunk mode doesn't give it any vlans to trunk on.  You must give it vlan members all
+- Updates can be done in the BSD subsystem or the cli.  You can use the usb port, scp, http, etc.
 
 ## Command Line
 Set Root Password:
@@ -156,4 +157,24 @@ Disable interface
 ```
 # deactivate [block to deactivate]
 # activate [block]
+```
+Undo a commit/rollback
+```
+# rollback [number]
+```
+Edit exclusive- don't let another user configure at the same time
+```
+> edit exclusive
+```
+Edit private- don't see other people's changes
+```
+> edit private
+```
+Apply a config at a certain time
+```
+# commit at [time]
+```
+Software upgrade/update
+```
+> request system software add [file]
 ```
