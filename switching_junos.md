@@ -11,6 +11,16 @@
 - Just setting a port to trunk mode doesn't give it any vlans to trunk on.  You must give it vlan members all
 - Updates can be done in the BSD subsystem or the cli.  You can use the usb port, scp, http, etc.
 
+## System Settings
+- Services: ways to access the machine (ssh, https, telnet, etc.)
+- management-instance: creates separate VRF for management automatically (version 17+)
+- load merge terminal relative (paste xml from terminal relative to where are in tree)
+- ports {console log-out-on-disconnect} 
+- aggregated devices {ethernet { device-count: # of allowed group}}
+- request system config rescue (save or delete) to boot from if current run is corrupted
+- storm-control: used for prevent DOS
+- firewall: used for ssh and snmp connections
+
 ## Command Line
 Set Root Password:
 ```
