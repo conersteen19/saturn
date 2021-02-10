@@ -52,3 +52,18 @@ def merge(lst, first, mid, last)
   Repeat til A and B empty
 ```
 Runtime: Θ(nlog(n)) = 2T(n/2) + n (which is a recurrence relation).  It is also stable.
+
+### Recurrance relations
+
+### Example: Maximum Subarray problem
+
+Given list A of + and - ints, return i and j indicies s.t. i <= j, 0 <= i,j <= A.len, A\[i,..,j\] sum of elements in A continuously.
+
+Brute force runs n^3 time.  But we can do better.
+
+What if we kept a separate array with sum from A\[0\] to A\[i\] leads to n^2 speed.  That is better but still exponential.
+
+Can we do better?  We can try divide and conquer using this mergesort recurrance: T(n) = 2T(n/2) + n.  Can we match the 2T(n/2)?  We can split down the middle by recursing a MaxSum(left) and MaxSum(right) to find the max on each side.  What would happen if a solution crossed a dividing line?  This algorithm breaks...
+
+What about the n step?  We can use n to check for the best solution that crosses the dividing line. We can do this by finding the best solutions that touch the node on the dividing line and merging them.  You can then compare that to MaxSum(l) and (r) and the max is your answer in nlogn time!
+
