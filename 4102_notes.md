@@ -2,11 +2,11 @@
 
 - Quizzes can be retaken up to 3 times but must be taken during quiz days
 - HW is due at hard deadline but the soft deadline is suggested for feedback
-- Final has no retrys but you can retake the other quizzes during the final window.
+- Final has no retries but you can retake the other quizzes during the final window.
 
 ## Divide and Conquer/Sorting
-Sorting is reordering a list to meet a set of criteria.  We will focus oin key comparison for this definition of sorting.  We do this because it is general, operations are proportional, and is usually expensive compared to things such as hashing.  We assume non-descenting order for simplicity.  Terminology:
-- Comparison sort: comepare keys and move items.
+Sorting is reordering a list to meet a set of criteria.  We will focus oin key comparison for this definition of sorting.  We do this because it is general, operations are proportional, and is usually expensive compared to things such as hashing.  We assume non-descending order for simplicity.  Terminology:
+- Comparison sort: compare keys and move items.
 - Adjacent sort: only swap adjacent elements.
 - Stable sort: two items with the same value appear in the same order as initially given.
 - In-place sort: uses at most Θ(1) extra space, e.g. not allocating another array of size Θ(n).
@@ -55,15 +55,17 @@ Runtime: Θ(nlog(n)) = 2T(n/2) + n (which is a recurrence relation).  It is also
 
 ### Recurrance relations
 
+firsh asdf 
+
 ### Example: Maximum Subarray problem
 
-Given list A of + and - ints, return i and j indicies s.t. i <= j, 0 <= i,j <= A.len, A\[i,..,j\] sum of elements in A continuously.
+Given list A of + and - ints, return i and j indices s.t. i <= j, 0 <= i,j <= A.len, A\[i,..,j\] sum of elements in A continuously.
 
 Brute force runs n^3 time.  But we can do better.
 
 What if we kept a separate array with sum from A\[0\] to A\[i\] leads to n^2 speed.  That is better but still exponential.
 
-Can we do better?  We can try divide and conquer using this mergesort recurrance: T(n) = 2T(n/2) + n.  Can we match the 2T(n/2)?  We can split down the middle by recursing a MaxSum(left) and MaxSum(right) to find the max on each side.  What would happen if a solution crossed a dividing line?  This algorithm breaks...
+Can we do better?  We can try divide and conquer using this mergesort recurrence: T(n) = 2T(n/2) + n.  Can we match the 2T(n/2)?  We can split down the middle by recusing a MaxSum(left) and MaxSum(right) to find the max on each side.  What would happen if a solution crossed a dividing line?  This algorithm breaks...
 
 What about the n step?  We can use n to check for the best solution that crosses the dividing line. We can do this by finding the best solutions that touch the node on the dividing line and merging them.  You can then compare that to MaxSum(l) and (r) and the max is your answer in nlogn time!
 
