@@ -53,9 +53,54 @@ def merge(lst, first, mid, last)
 ```
 Runtime: Θ(nlog(n)) = 2T(n/2) + n (which is a recurrence relation).  It is also stable.
 
-### Recurrance relations
+### Recurrence relations
 
-firsh asdf 
+Recurrence relationships are used to characterize algorithms and help understand how fast algorithms will run.
+
+The primary example is the **MASTER THEOREM**.  This is given below.
+```
+If  T(n) = a T(n/b) + f(n) 
+then let k = lg a / lg b = logb(a) (critical exponent)
+
+Then three common cases:
+If f(n) is element of O(n^k-e) for some positive e, then T(n) is element of Θ(nk)
+
+If f(n) is element of o(nk) then T(n) is element of Θ( f(n) log(n) ) = Θ(nk log(n))
+
+If f(n) is element of o(nk+) for some positive , and 
+      a f(n/b) ≤ c f(n) for some c < 1 and sufficiently large n, then T(n) is an element of Θ(f(n))
+
+Note: none of these cases may apply
+```
+
+This can be applied like so:
+1. find k using the log
+1. Compare the back function.  How does f(n) compare to n^k?
+1. Can f(n) be an element of O(n^k-e) (or other cases?)
+1. If so, you have your runtime!
+1. If not, you will likely need another method (substitution, etc.)
+
+Examples:
+
+T(n) = T(n/2) = n
+- k = log_2(1) = 0
+- How does f(n) = n compare to n^0 = 1?  It grows more quickly...
+- Looks like case 3.  n is element of Omega(n^0+.1) -> does n grow faster?  Yes!
+- Θ(f(n)) = Θ(n)
+
+T(n) = T(n/2) + lg(n) (base 2)
+- Let's try the iteration method
+	- T(n) = T(n/4)+log(n/2)+log(n) = T(n/4) + log(n) - log(2) + log(n) = T(n/4) + 2log(n)-1
+	- T(n) = T(n/8) + log(n/4) + 2log(n) - 1 = ...
+	- (Repeat d times)
+	- T(n) = T(n/2^d) + dlog(n) - d(d-1)/2
+	- Plug in example: T(1) = 1 -> d = log(n) -> 1T(1) + log(n)log(n) - log(n)log(n-1)/2 -> Θ(log^2(n))
+- What about the master theorem?
+	- k = log(1) = 0
+	- How does log(n) compare to n^0?
+	- Could it be case 3?  log(n) is element of Omega(n^0+e)?  No!
+	- Breaks master theorem!  log(n) grows more slowly than any polynomial.
+	- Master theorem doesn't apply.
 
 ### Example: Maximum Subarray problem
 
