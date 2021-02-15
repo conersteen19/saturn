@@ -104,7 +104,7 @@ T(n) = T(n/2) + lg(n) (base 2)
 
 ### Example: Maximum Subarray problem
 
-Given list A of + and - ints, return i and j indices s.t. i <= j, 0 <= i,j <= A.len, A\[i,..,j\] sum of elements in A continuously.
+Problem: given list A of + and - ints, return i and j indices s.t. i <= j, 0 <= i,j <= A.len, A\[i,..,j\] sum of elements in A continuously.
 
 Brute force runs n^3 time.  But we can do better.
 
@@ -114,3 +114,31 @@ Can we do better?  We can try divide and conquer using this mergesort recurrence
 
 What about the n step?  We can use n to check for the best solution that crosses the dividing line. We can do this by finding the best solutions that touch the node on the dividing line and merging them.  You can then compare that to MaxSum(l) and (r) and the max is your answer in nlogn time!
 
+### Example: QuickSort
+
+Quicksort is a divide and conquer algorithm and uses a strategy called 'partition' or split, a strategy that comes in a variety of methods.  Strategy is as follows:
+- Call on subsection from first to last
+- Choose a pivot element.  Element doesn't particularly matter but we use the first one often.
+- Call partition.  Partition puts the pivot element in its proper place, smaller items below and larger items above
+- Recurse on smaller and smaller groups on each side of the pivot
+
+Different algorithms in choosing the pivot take different amounts of time.  We prefer Lomuto's Algorithm which uses the pivot element as the last item in the list.  Works as so:
+- Look through list with value x, setting two values: i and j.  i is set whenever it sees the first value larger than the pivot and j is set when values stop getting larger after i.
+- Drop x in where i is and shift i + 1 to j up one spot
+- n - 1 comparisons.
+
+This runs best case T(n) = 2T(n/2) + n-1, which is good if the sections are split right down the middle.  However, when sections are divided unequally, the recurrence goes to T(n) = T(0) + T(n01) + n-1 which lands at Θ(n^2).  The average case, however, is nlogn which is good.  We can avoid those worse case scenarios by choosing a random element between first and last and swapping with the last element or using the "median of three" method (choose first, last, middle, swap largest with max, sort).
+
+This shows that quicksort works best with large, unsorted lists while insertion sort may be more efficient with smaller or sorted lists.  So change your base case to reflect this!
+
+### Example: Closest Pair of Points
+
+Problem: given a list of 2d points, find the pair of points that are closest together.
+
+Brute force is, as expected, O(n^2).  But we can divide and conquer it:
+- Split along x coordinate median
+- Recursively find closest pair left and right
+- Find closest pair crossing the line.  Don't do this straight up... find the smallest distance of your left and right and only test points within a distance of the midline that could possibly be shorter.  Called a 'runway'.
+	- This could still be O(n^2) if all points are in runway.  You can get around this with geometry.  Progress up from y order and only check the next 7 points above it to see if less than delta- everything else must be too far!
+
+This algorithm is efficient besides the point you will need to calculate a base case and sort the values by x and y.  It runs as T(n) = 2T(n/2) + Θ(n) which tells us it is Θ(nlogn) by the master theorem.
