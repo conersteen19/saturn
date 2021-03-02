@@ -63,11 +63,11 @@ If  T(n) = a T(n/b) + f(n)
 then let k = lg a / lg b = logb(a) (critical exponent)
 
 Then three common cases:
-If f(n) is element of O(n^k-e) for some positive e, then T(n) is element of Θ(nk)
+If f(n) is element of O(n^k-ε) for some positive ε, then T(n) is element of Θ(nk)
 
-If f(n) is element of o(nk) then T(n) is element of Θ( f(n) log(n) ) = Θ(nk log(n))
+If f(n) is element of O(nk) then T(n) is element of Θ( f(n) log(n) ) = Θ(nk log(n))
 
-If f(n) is element of o(nk+) for some positive , and 
+If f(n) is element of O(nk+ε) for some positive ε, and 
       a f(n/b) ≤ c f(n) for some c < 1 and sufficiently large n, then T(n) is an element of Θ(f(n))
 
 Note: none of these cases may apply
@@ -142,3 +142,48 @@ Brute force is, as expected, O(n^2).  But we can divide and conquer it:
 	- This could still be O(n^2) if all points are in runway.  You can get around this with geometry.  Progress up from y order and only check the next 7 points above it to see if less than delta- everything else must be too far!
 
 This algorithm is efficient besides the point you will need to calculate a base case and sort the values by x and y.  It runs as T(n) = 2T(n/2) + Θ(n) which tells us it is Θ(nlogn) by the master theorem.
+
+### Example: Quickselect
+
+The issue with Quicksort is the worst case.  If we could use a median to regularly split our list in the middle we can enforce better run time.  Quickselect has the same problem and has to do with finding the smallest item in a list.
+
+Problem: given a list of numbers and value i, select the value x which is larger than exactly i - 1 elements.
+
+Divide and conquer like so:
+- Divide: select element p, Partition(P)
+- Conquer: if i = index of p, done!  if i < index of p, recurse left.  Else recurse right.  (Only one recursive call!)
+- Combine: Nothing!
+
+We need to decide how to choose our pivot element.  If we take the logic we took above we will be stuck with the same time (Θ(nlogn)).  Randomized selection works pretty well but we can do better.
+
+### Example: Median of Medians
+
+Used to find something close to the median in Θ(n) time.  Promises that it is 30% < x < 70% of all values.  Done by:
+
+- Split list into sublists of chunks of 5
+- Find median of each chunk with insertion sort (20 comparisons)
+- Return median of medians
+
+This leads to a asymptotic Θ(nlogn) approach but has large constants i.e. isn't great for small lists.  Random is generally better but at the worst case isn't.
+
+Run time for (comparison-based) sorting algos will ALWAYS be worse than or equal to Θ(nlogn)!  Proof can be done by decision tree: take the depth of the tree and prove asymptotic relationship.
+
+## Trees
+
+Trees are a common data structure with common problems.  Trees are defined as having children and only one parent in a linear like structure with a root note.  A spanning tree of graph G is a subgraph that contains every vertex and is also still a tree.  Involves removing a subset of edges to find optimal connections.  It is more common to find the minimum cost of a spanning tree.
+
+### Example: Kruskal's Algo
+
+Kruskal's Algo involved building one tree and making the tree one bigger by adding the next best node (smallest weight).  Each edge added will connect to two trees and should be checked for cycles.  This works by building a forest-i.e. taking edges that are most efficient without care if they are connected to the existing tree.  It then checks for loops and picks the next shortest node.  Uses a priority queue to check edges Θ(Elog(V)) for edges and find and unioin run in Θ(E(2f(V) + u(V))) which makes the overall algo O(V^3) (assuming find and union linear time).
+
+In the past we have used Disjointed Sets to do the creation of sets and merging for us.  Time to figure out how.
+
+We want to support makeSet(int n) to make n independent sets, findSet(int i) that checks what set i belongs to, and union(int i, int j) merges the sets containing i and j.  Can be implemented with other data structures but this ex uses arrays.
+
+- makeSet(int n): make array of size n with labels for that set stored in each index.  The label must be an element of the set that label is referencing, but labels can represent more than one value.  Linear.
+- findSet(int i): Look at index i.  If there return it, otherwise set i=a\[i\] and repeat.  Linear if you have to trace a long way but can be constant if lucky.
+- union(int i, int j): findSet(i) and findSet(j) then change one of those labels to match the other.  Constant to change labels but 2\*linear to find them.
+
+This can be optimized by storing the value of the joined arrays to whichever tree is smaller to keep size small.  You can also path compress by changing values whenever a new node is found higher up to jump some subnodes.
+
+Union by rank yields Θ(m a(n)) which grows very slow.
