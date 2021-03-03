@@ -168,6 +168,27 @@ This leads to a asymptotic Θ(nlogn) approach but has large constants i.e. isn't
 
 Run time for (comparison-based) sorting algos will ALWAYS be worse than or equal to Θ(nlogn)!  Proof can be done by decision tree: take the depth of the tree and prove asymptotic relationship.
 
+### Example: Heaps, Heapsort
+Heap: almost complete binary tree where at any given node j, value\[j\] has a higher priority than either of its children.  Heaps can be max or min and are weakly sorted i.e. not perfectly sorted.
+
+Heapsort is Θ(nlog(n)) and in place which is pretty good.  Also has heap-max/min, max-heap-insert (Θ(logn)), max-heapify (return heap to sorted format) (Θ(logn)) and heap-extract-max (Θ(logn)) to return max item.  Height of node is max(node->leaf), height of heap is max(root->node).
+
+How do we build heaps?  We can use insert-heap on each element which is convenient but not the best.  We can do better with build-max-heap using heapify.  Given an unsorted array, we can call heapify on repeat from floor(n/2) (the last node that has children) to 1 of a unsorted array and heapify will rotate values to optimize the heap.  This comes out as Θ(n) with an upper bound of O(nlogn).
+
+How can we sort a heap?  Well we know the max element is stored at the root.  We can touch this up by calling max-heapify on the root but with a heapify that decrements.  This shrinks the heap every operation AND in place!  Psuedocode:
+
+```
+Heapsort(A)
+	for i = A.len to 2:
+		flip A[1] and A[i]
+		A.heapsize -= 1
+		max-heapify(A,1)
+```
+
+### Example: Matrix multiplication with Strassen's Algo
+
+Matrix multiplication is slow (up to O(n^3)).  We can speed it up with Stressen's Algo.  Stressen's algorithm contains a series of multiplications (called Qs) and those Qs can be used to calculate matrices which simplifies the recurrence to Θ(n^2.807) which is better at large cases.  People have slowly reduced it to n^2.39 over time.
+
 ## Trees
 
 Trees are a common data structure with common problems.  Trees are defined as having children and only one parent in a linear like structure with a root note.  A spanning tree of graph G is a subgraph that contains every vertex and is also still a tree.  Involves removing a subset of edges to find optimal connections.  It is more common to find the minimum cost of a spanning tree.
