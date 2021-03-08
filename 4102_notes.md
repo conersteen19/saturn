@@ -220,3 +220,5 @@ A common strategy is to use a stack.  Start at node s by pushing it to the stack
 DFS is great for finding cycles in the graph when directed.  We call edges that go from the current node to the root/ancestor a **back edge** and going from a root to a grandchild or leaf is called a **descendent edge**.  Finally, edges between leafs or other non-root nodes are called **cross edge**.  Going back to a gray node shows that you have a back edge.  This breaks in undirected graphs.
 
 DFS runs in Θ(V+E) which is pretty good.  Space complexity is Θ(V)
+
+Examples go as follows: Max degree of separation?  BFS!  Find most adjacent nodes?  Adjacency list.  Find bipartite (Nodes in set V1 or V2, edges only connect V1 to V2 or vice versa, no interior edges) graph?  Trees are bipartite so run DFS to check if cycles exist.  If not, good to go!
