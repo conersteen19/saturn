@@ -208,3 +208,15 @@ We want to support makeSet(int n) to make n independent sets, findSet(int i) tha
 This can be optimized by storing the value of the joined arrays to whichever tree is smaller to keep size small.  You can also path compress by changing values whenever a new node is found higher up to jump some subnodes.
 
 Union by rank yields Θ(m a(n)) which grows very slow.
+
+### Example: DFS
+
+Depth-first search works by going as deep in a tree as you can until you reach a dead end then backing up and making another choice.  
+
+DFS traverses a subset of E (the set of edges) and each node has a distance from the start.  All nodes can be 3 states.  Undiscovered nodes haven't been touched yet, finished are nodes you've backed up, and discovered nodes have been visited but will be revisited.
+
+A common strategy is to use a stack.  Start at node s by pushing it to the stack and mark as visited.  While S is not empty, pop node and process by marking neighbors as visited and then pushing neighbor onto stack.  Repeating yields your DFS tree.  Note this is the same strategy as BFS but uses a stack instead of a queue.  We can also do this recursively which looks cleaner but functions the same.  You can also visit all vertices by calling the recursive function on every node in the graph.
+
+DFS is great for finding cycles in the graph when directed.  We call edges that go from the current node to the root/ancestor a **back edge** and going from a root to a grandchild or leaf is called a **descendent edge**.  Finally, edges between leafs or other non-root nodes are called **cross edge**.  Going back to a gray node shows that you have a back edge.  This breaks in undirected graphs.
+
+DFS runs in Θ(V+E) which is pretty good.  Space complexity is Θ(V)
