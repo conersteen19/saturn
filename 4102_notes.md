@@ -221,4 +221,16 @@ DFS is great for finding cycles in the graph when directed.  We call edges that 
 
 DFS runs in Θ(V+E) which is pretty good.  Space complexity is Θ(V)
 
-Examples go as follows: Max degree of separation?  BFS!  Find most adjacent nodes?  Adjacency list.  Find bipartite (Nodes in set V1 or V2, edges only connect V1 to V2 or vice versa, no interior edges) graph?  Trees are bipartite so run DFS to check if cycles exist.  If not, good to go!
+Examples go as follows: Max degree of separation?  BFS!  Find most adjacent nodes?  Adjacency list.  Find bipartite (Nodes in set V1 or V2, edges only connect V1 to V2 or vice versa, no interior edges) graph?  Trees are bipartite so run DFS to check if cycles exist.  If not, good to go!  Longest path to node in DAG?  Find the longest path to each node as you go and record your length.
+
+### Example: Topological Sort
+Given a directed acyclic graph, construct a linear ordering of vertices s.t. if an edge exists from u to v, u must become before v in the list.
+
+We can use DFS with start/finish times. Topologically sorted vertices appear in reverse order of their finish times.  We need to modify existing code in DFS-Visit to append the node to the finish list after its finished its processing.  Directions of arrows can be flipped to change order.
+
+### Example: Strongly Connected Components in a Digraph
+In a digraph, SCCs are subgraphs where all vertices are reachable from one another.  We often need to decompose a digraph into these SCCs.  You can view this as after exiting one SCC, you can't go back into the same one.  
+
+There are several algos for this but we will use Kosaraju and Sharir's choice.  This involves finding the DFS and recording finishing times.  Then find the transpose of the graph.  The call DFS-Sweep on the transpose but do recursive calls on the nodes in order of decreasing u.f. (start with largest finish time?)  Forest made from this is the set of SCCs.
+
+This works because of reversing edge direction, a node may be able to leave its tree but during the transpose may not be able to reach all notes.  If a node can reach a set of nodes going fowards AND backwards then we know it forms a SCC.  As long as we **don't go to visited nodes and start at the max finish time** we will end up with out SCCs.
