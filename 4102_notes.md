@@ -143,7 +143,7 @@ Brute force is, as expected, O(n^2).  But we can divide and conquer it:
 
 This algorithm is efficient besides the point you will need to calculate a base case and sort the values by x and y.  It runs as T(n) = 2T(n/2) + Θ(n) which tells us it is Θ(nlogn) by the master theorem.
 
-### Example: Quickselect
+### Quickselect
 
 The issue with Quicksort is the worst case.  If we could use a median to regularly split our list in the middle we can enforce better run time.  Quickselect has the same problem and has to do with finding the smallest item in a list.
 
@@ -168,7 +168,7 @@ This leads to a asymptotic Θ(nlogn) approach but has large constants i.e. isn't
 
 Run time for (comparison-based) sorting algos will ALWAYS be worse than or equal to Θ(nlogn)!  Proof can be done by decision tree: take the depth of the tree and prove asymptotic relationship.
 
-### Example: Heaps, Heapsort
+### Heaps, Heapsort
 Heap: almost complete binary tree where at any given node j, value\[j\] has a higher priority than either of its children.  Heaps can be max or min and are weakly sorted i.e. not perfectly sorted.
 
 Heapsort is Θ(nlog(n)) and in place which is pretty good.  Also has heap-max/min, max-heap-insert (Θ(logn)), max-heapify (return heap to sorted format) (Θ(logn)) and heap-extract-max (Θ(logn)) to return max item.  Height of node is max(node->leaf), height of heap is max(root->node).
@@ -193,7 +193,7 @@ Matrix multiplication is slow (up to O(n^3)).  We can speed it up with Stressen'
 
 Trees are a common data structure with common problems.  Trees are defined as having children and only one parent in a linear like structure with a root note.  A spanning tree of graph G is a subgraph that contains every vertex and is also still a tree.  Involves removing a subset of edges to find optimal connections.  It is more common to find the minimum cost of a spanning tree.
 
-### Example: Kruskal's Algo
+### Kruskal's Algo
 
 Kruskal's Algo involved building one tree and making the tree one bigger by adding the next best node (smallest weight).  Each edge added will connect to two trees and should be checked for cycles.  This works by building a forest-i.e. taking edges that are most efficient without care if they are connected to the existing tree.  It then checks for loops and picks the next shortest node.  Uses a priority queue to check edges Θ(Elog(V)) for edges and find and unioin run in Θ(E(2f(V) + u(V))) which makes the overall algo O(V^3) (assuming find and union linear time).
 
@@ -209,7 +209,7 @@ This can be optimized by storing the value of the joined arrays to whichever tre
 
 Union by rank yields Θ(m a(n)) which grows very slow.
 
-### Example: DFS
+### DFS
 
 Depth-first search works by going as deep in a tree as you can until you reach a dead end then backing up and making another choice.  
 
@@ -234,3 +234,13 @@ In a digraph, SCCs are subgraphs where all vertices are reachable from one anoth
 There are several algos for this but we will use Kosaraju and Sharir's choice.  This involves finding the DFS and recording finishing times.  Then find the transpose of the graph.  The call DFS-Sweep on the transpose but do recursive calls on the nodes in order of decreasing u.f. (start with largest finish time?)  Forest made from this is the set of SCCs.
 
 This works because of reversing edge direction, a node may be able to leave its tree but during the transpose may not be able to reach all notes.  If a node can reach a set of nodes going fowards AND backwards then we know it forms a SCC.  As long as we **don't go to visited nodes and start at the max finish time** we will end up with out SCCs.
+
+### Dijkstra's / Prim's Algo
+
+These are greedy graph algorithms that use nearly the same code.  Greedy means they make the best decision possible at each point.
+
+Dijkstra's: Stars at unknown vertex.  Choose next vertex with shortest distance to next v, mark v as known, and then for each edge from v adj to unknown vertices, update w's dist if it is less than what is already stored.  Runtime depends on finding next shortest node, which in list form we can do in Θ(V^2) time. You can do this faster with a priority queue to knock down runtime to Θ(Vlog(V) + EV) due to decreasing a key which is slow and linear operation.
+
+Prim's is the same structure, runtime, etc.  You start at a known node then record your node's distances to each adjacent node.  Then go to your shortest path and check that node for shorter paths.
+
+We need to fix finding a node in a MST, reducing the value, and percolating the value.  If we gave each node an ID populated in another array with values of the heap stored in it.  For instance, a node with ID of 0 would store the distance to that node in position 0 of the second array.  You can then check that second array to find nodes in constant time.  This array can be called in indirect heap.  Make sure to update both arrays when percolating or moving values.  You then land at Θ(Vlog(V) + Elog(V))!
