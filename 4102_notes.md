@@ -247,3 +247,14 @@ We need to fix finding a node in a MST, reducing the value, and percolating the 
 
 Runtime can be proved with an inductive argument.  The base case is the first node and it takes 0 distance to get from root to the root.  The inductive step assumed we have an optimal graph, what happens when we add one more?  We know that node is the next shortest as it comes off the queue.  We also know that the edge between that and any given node is the dist to that node plus the edge weight.  We can use exchange argument: compare our way with another way to prove our way is the best.  In other words a 'swap' doesn't make the solution better.  In our case, we can take a different path to our node.  But since we are pulling from a priority queue, we **know** that this path is either as good or worse than what we have.  QED.
 
+## Greedy Algos and Dynamic Programming
+
+These two methods are used to help optimize a variety of algorithms but have two different fundamental approaches.  Greedy algorithms involve making choices optimally and assuming they are correct while dynamic programming involves solving and storing solutions of subproblems.
+
+### Example: Log Cutting 
+
+Given a log of length n and the price of different lengths of log, what is the optimal way to cut the log to maximize profit?  Worse case is O(2^n) which we can do much better.
+
+Imagine that we need to have a 'last cut' of the log.  Thus we assume that last piece is sold and we can find the optimal solution of the remaining log.  The values of each of these halves is independent from each other.  We can then say that the optimal place of that cut should be the max sum of cutting the shortest possible, the maximum possible (in this case, not cutting at all) or one of the values in-between.  So you can then loop through starting at a min value to find the optimal solution for that length and use that value to find increasingly higher maximums.  I.e. given cut(1) through cut(4), you can find cut(5) by comparing cut(1)+cut(4), cut(2)+cut(3), and cut(5)+cut(0).
+
+This is a dynamic programming solution.  You a nested look making this O(n^2).  This uses **memoization** which is storing solutions to subproblems in a table instead of recomputing them.
