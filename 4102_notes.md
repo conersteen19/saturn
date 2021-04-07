@@ -258,3 +258,8 @@ Given a log of length n and the price of different lengths of log, what is the o
 Imagine that we need to have a 'last cut' of the log.  Thus we assume that last piece is sold and we can find the optimal solution of the remaining log.  The values of each of these halves is independent from each other.  We can then say that the optimal place of that cut should be the max sum of cutting the shortest possible, the maximum possible (in this case, not cutting at all) or one of the values in-between.  So you can then loop through starting at a min value to find the optimal solution for that length and use that value to find increasingly higher maximums.  I.e. given cut(1) through cut(4), you can find cut(5) by comparing cut(1)+cut(4), cut(2)+cut(3), and cut(5)+cut(0).
 
 This is a dynamic programming solution.  You a nested look making this O(n^2).  This uses **memoization** which is storing solutions to subproblems in a table instead of recomputing them.
+
+### When does greedy work?
+
+Greedy algorithms only work when the problem has optimal substructure and has the greedy choice property.  Optimal structure in the problem means that it can be arranged in a way that removing one option still keeps the same optimal solution.  Greedy choice property states that the first thing that was added to the solution must be correct- i.e. the largest coin is the best choice if possible.  You can prove this with individual proof by contradictions for each of the given values.   The coin contradiction proof could break easily with testing 12 coins with 1, 6, 10 sizes. 
+
