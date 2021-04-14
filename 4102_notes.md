@@ -263,7 +263,7 @@ This is a dynamic programming solution.  You a nested look making this O(n^2).  
 
 Greedy algorithms only work when the problem has optimal substructure and has the greedy choice property.  Optimal structure in the problem means that it can be arranged in a way that removing one option still keeps the same optimal solution.  Greedy choice property states that the first thing that was added to the solution must be correct- i.e. the largest coin is the best choice if possible.  You can prove this with individual proof by contradictions for each of the given values.   The coin contradiction proof could break easily with testing 12 coins with 1, 6, 10 sizes.
 
-### The String Edit Distance Problem
+### Example: The String Edit Distance Problem
 
 How do we define the similarity of two strings?  We can study alignment, or the differences in two strings instead of the raw difference in characters.  We can define a difference in two stings as a penalty we represent with delta.  We also set a mismatch penalty alpha to represent two different characters (usually double the delta).  To solve the problem we match values across strings and pair them up, stating if they are mismatches or deltas.  We then sum up each of the errors to find out cost.  (Ex. cost = sum(alpha) + sum(delta_x) + sum(delta_y).
 
@@ -271,4 +271,8 @@ Let's approach this dynamically.  Start by defining x_m and y_m as the current c
 
 This is similar to sequence matching.  We use a similar grid approach with slightly different criteria.  In this case, we want to find the smallest common subsequence.  You start by filling the first row and col with 0s and progress until you find a match.  On a match, take the upper left diagonal value and add 1 to it.  If no match, take the largest of the left and top.  This finds the length of the longest substring.  You can go backwards by taking the largest value unless you are at a match, in which case you move diagonal.  Reference live lecture 4/12 for more details.
 
+### Example: Gerrymandering
 
+Given P precincts with m voters each (m\*n total votes), find two districts D that include a subset of P s.t. size(D_1) = size(D_2) and one party p_0 has the majority of votes in each D.  In our example, we assume n precincts, 2 parties, and 2 districts.
+
+Consider an inductive step.  D_1 has k precincts and x votes for p_0 and D_2 has n-k-1 precincts and y votes for p_0.  We can put this next precinct in either of these pools- how do we decide?  Think recursively.  Consider a function where we pass j number of precincts, k assigned to D_i, x votes for p_0 in D_1, and y votes for p_0 in D_2.  We are working backwards and must consider two cases- S(j-1,k-1,x-votes(p, p_0), y) and S(j-1, k, x, y-votes(p,p_0).  We know if gerrymandering is possible if this returns a bitwise OR (Use S(0,0,0,0)=true to start)  Loop through recursively and look for an entry of S(n, n/2, > mn/4, >mn/4) to prove it is possible.  Complexity is Θ(n^4\*m^2) but note m is an integer- what does this mean for complexity?  This is pseudo-polynomial time which actually means its exponential!
