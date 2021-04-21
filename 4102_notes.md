@@ -275,4 +275,25 @@ This is similar to sequence matching.  We use a similar grid approach with sligh
 
 Given P precincts with m voters each (m\*n total votes), find two districts D that include a subset of P s.t. size(D_1) = size(D_2) and one party p_0 has the majority of votes in each D.  In our example, we assume n precincts, 2 parties, and 2 districts.
 
-Consider an inductive step.  D_1 has k precincts and x votes for p_0 and D_2 has n-k-1 precincts and y votes for p_0.  We can put this next precinct in either of these pools- how do we decide?  Think recursively.  Consider a function where we pass j number of precincts, k assigned to D_i, x votes for p_0 in D_1, and y votes for p_0 in D_2.  We are working backwards and must consider two cases- S(j-1,k-1,x-votes(p, p_0), y) and S(j-1, k, x, y-votes(p,p_0).  We know if gerrymandering is possible if this returns a bitwise OR (Use S(0,0,0,0)=true to start)  Loop through recursively and look for an entry of S(n, n/2, > mn/4, >mn/4) to prove it is possible.  Complexity is Θ(n^4\*m^2) but note m is an integer- what does this mean for complexity?  This is pseudo-polynomial time which actually means its exponential!
+Consider an inductive step.  D_1 has k precincts and x votes for p_0 and D_2 has n-k-1 precincts and y votes for p_0.  We can put this next precinct in either of these pools- how do we decide?  Think recursively.  Consider a function where we pass j number of precincts, k assigned to D_i, x votes for p_0 in D_1, and y votes for p_0 in D_2.  We are working backwards and must consider two cases- S(j-1,k-1,x-votes(p, p_0), y) and S(j-1, k, x, y-votes(p,p_0).  We know if gerrymandering is possible if this returns a bitwise OR (Use S(0,0,0,0)=true to start)  Loop through recursively and look for an entry of S(n, n/2, > mn/4, > mn/4) to prove it is possible.  Complexity is Θ(n^4\*m^2) but note m is an integer- what does this mean for complexity?  This is pseudo-polynomial time which actually means its exponential!
+
+## Network Flow and Reductions
+
+### Flow Networks
+Consider a flow network with the following properties:
+- A source node s
+- A terminal node t
+- Capacities on each edge
+
+What is the max flow you can get from s to t?  We consider the following rules:
+- s has no incoming flow, t has no outgoing flow
+- Internal nodes have net zero flow (same amt in as out)
+- No edge is over capacity
+- Edges don't need to take their max value, just whatever is optimal
+
+How would one find the max flow?  Ford-Fulkerson!  We want to find a path from s to t s.t. the min residual capacity > 0.  We can find paths but not all will be optimal (depending on order, of course).  In this case we must use backflow to find the path.  These edges start at n/n backflow and 0/n normal flow.  As flow is put into the normal flow, the backflow unfills.  You can model paths through these backflow edges from s to t as a valid path which in the real world simulates \'redirecting flow\'.  Runtime is O(E\*f) which is number of edges and max flow of final graph (due to worse case dfs).
+
+### Min Cut
+Problem:  Given a flow network, we want to cut edges s.t. a cut C of splits all nodes into subsets A and B with s in A and t in B.  One cut can cut multiple edges at once.  The net flow of a cut is the sum of the flows from A to B minus flows from B to A.  Let f be any flow and C be any cut means the net from across A, B equals the value of the flow f.  This defintion is equivalent to flow through the network.  This can be proven inductively (in recorded lecture 4/21).
+
+This can be used to find max flow!  Look at all the cuts and find the smallest capacity and this must be your max flow value!  These algorithms solve the same problem.
