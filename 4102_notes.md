@@ -297,3 +297,28 @@ How would one find the max flow?  Ford-Fulkerson!  We want to find a path from s
 Problem:  Given a flow network, we want to cut edges s.t. a cut C of splits all nodes into subsets A and B with s in A and t in B.  One cut can cut multiple edges at once.  The net flow of a cut is the sum of the flows from A to B minus flows from B to A.  Let f be any flow and C be any cut means the net from across A, B equals the value of the flow f.  This defintion is equivalent to flow through the network.  This can be proven inductively (in recorded lecture 4/21).
 
 This can be used to find max flow!  Look at all the cuts and find the smallest capacity and this must be your max flow value!  These algorithms solve the same problem.
+
+### Reduction
+
+Reduction is using the solutions to old problems to solve new problems.  This can be done to simplify and relate problems.
+
+An example is edge-disjoint and vertex-disjoint paths.  Edge-disjoint looks for the max number of unique paths (i.e. don't share an edge) in graph G from node u to v.  This relates to max network flow- make u and v source and sink, give edges capacity of 1, find max flow!  This works as your max flow will be equal to the number of edge-disjoint paths.
+
+What about vertex-disjoint paths?  These are the same as edge-disjoint paths except they share no nodes on the path instead of edges.  We can think of  this as for each node, split it into two nodes with one node with all inputs and other node with all inputs and one edge between them.  This restricts the solutions between the two for an edge-disjoint algorithm and can be solves as edge-disjoint does!
+
+This is reduction- the vertex-disjoint problem can be **reduced** to the edge-disjoint problem.  These problems often require a polynomial conversion, meaning it takes polynomial time to turn problem A into a form that problem B can solve.
+
+### Bipartite Graphs 
+Bipartite graphs are graphs were nodes can be separated into two distinct groups where edges only cross between the two groups.  This can be found using BFS or DFS using colors to label nodes as your cross around.
+
+Max Bipartite Matching is trying to match as many nodes in each group to nodes on the other side.  A perfect match has one node to each other node.  This can be found a few ways... what about max flow?  Set a source node and sink node with an edge from the source/sink connected to each of the individual groups.  You set all weights to 1 and run max flow and you have your flow!  How magical!
+
+### N, NP, etc.
+
+Vertex cover is a problem finding the min number of verticies to have each edge connected.  Time is as follows:
+- P: deterministic polynomial time.  P is the set of problems that is directly solvable in polynomial time.
+- NP: non-deterministic polynomial time.  NP we can verify a soln in polynomial time.  But does P=NP?
+- NP-Hard: Problems that are at least as as hard as NP.
+- NP-Complete = NP and NP-Hard
+
+We can show a problem is NP-Complete by showing we can verify a soln in poly time and show it is NP-Hard by showing a reduction to an NP-Hard problem.  This is baed on the Cook-Levin Thm that proves the SAT problem is NP-Complete.
